@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var bodyParser= require("body-parser");
+let express = require('express');
+let router = express.Router();
+let bodyParser= require("body-parser");
 
 
-var character = require('../controllers/characters');
+let sighting = require('../controllers/sightings');
 
 
 
@@ -18,11 +18,11 @@ router.get('/index', function(req, res, next) {
 });
 
 router.get('/add', function(req, res, next) {
-  res.render('add', { title: 'Add a new Character to the DB' });
+  res.render('add', { title: 'Add a new Sighting to the DB' });
 });
 
 router.post('/add', function(req, res) {
-  character.create(req,res);
+  sighting.create(req,res);
 });
 
 

@@ -9,7 +9,7 @@ function sendAjaxQuery(url, data) {
             // no need to JSON parse the result, as we are using
             // dataType:json, so JQuery knows it and unpacks the
             // object for us before returning it
-            var ret = dataR;
+            let ret = dataR;
             // in order to have the object printed by alert
             // we need to JSON stringify the object
             document.getElementById('results').innerHTML= JSON.stringify(ret);
@@ -22,8 +22,8 @@ function sendAjaxQuery(url, data) {
 }
 
 function onSubmit() {
-    var formArray= $("form").serializeArray();
-    var data={};
+    let formArray= $("form").serializeArray();
+    let data={};
     for (index in formArray){
         data[formArray[index].name]= formArray[index].value;
     }

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+<h1><%= title %></h1>
+
+<ul>
+
+    <% for(var i=0; i<data.length; i++) {%>
+        <li>
+            <span><%= data[i].first_name %></span>
+            <span><%= data[i].family_name %></span>
+            <span><%= data[i].dob %></span>
+            <span><%= data[i].age %></span>
+        </li>
+    <% } %>
+</ul>
+
+</body>
+</html>

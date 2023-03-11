@@ -9,6 +9,18 @@
 <body>
 <h1><%= title %></h1>
 
+<ul>
+
+    <% for(let i=0; i<data.length; i++) {%>
+        <li>
+            <span><%= data[i].description%></span>
+            <span><%= data[i].username %></span>
+            <span><%= data[i].last_seen %></span>
+            <span><%= data[i].location %></span>
+        </li>
+    <% } %>
+</ul>
+
 
 
 

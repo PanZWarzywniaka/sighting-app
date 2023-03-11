@@ -24,6 +24,21 @@ exports.create = function (req, res) {
     });
 };
 
+exports.find = function(req, res) {
+    let ret = []
+    Sighting.find({},(err,sightings) => {
+        if (err){
+            console.log(err)
+        } else {
+            ret = sightings
+            console.log(`In controler ${ret}`);
+            res.render('index', { title: 'My Form' , data:sightings});
+        }
+    })
+
+    return ret
+};
+
 
 
 

@@ -9,7 +9,8 @@ let sighting = require('../controllers/sightings');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'My Form' });
+  let result = sighting.find(req,res);
+  console.log(`In router: ${result}`);
 });
 
 

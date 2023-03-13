@@ -7,11 +7,14 @@ let path = require('path');
 exports.create = function (req, res) {
     let userData = req.body;
     let sighting = new Sighting({
-
-        descritpion: userData.descritpion,
+        identification: userData.identification,
+        description: userData.description,
         username: userData.username,
         last_seen: userData.last_seen,
-        location: userData.location
+        location: {
+            type: "Point",
+            coordinates: [parseFloat(req.body.lng), parseFloat(req.body.lat)]
+        },
     });
 
     sighting.save(function (err, results) {

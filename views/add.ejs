@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1><%= title %></h1>
-<p>Click on the map to add markers.</p>
+<p>Click on the map to add a marker.</p>
 <div id="map"></div>
 <form id="xForm" method="post" action="/add">
     <p><label for="identification">Identification:</label>
@@ -22,8 +22,7 @@
     <p><label for='last_seen'>Last seen:</label>
         <input type="datetime-local" name="last_seen" id="last_seen">
     </p>
-    <input type="hidden" name="lng" id="lng" required>
-    <input type="hidden" name="lat" id="lat" required>
+    <input type="hidden" name="location" id="location">
 
     <p><input type="submit" name="g" value="Submit" id="g"></p>
 </form>

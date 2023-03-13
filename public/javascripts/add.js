@@ -18,8 +18,7 @@ function initMap() {
     // Place marker where user clicks on map and store longitude and latitude in hidden input fields in the form
     map.addListener("click", (event) => {
         addMarker(event.latLng);
-        document.getElementById('lng').value = `${event.latLng.lng()}`
-        document.getElementById('lat').value = `${event.latLng.lat()}`
+        document.getElementById('location').value = `${event.latLng.lng()},${event.latLng.lat()}`;
     });
 }
 

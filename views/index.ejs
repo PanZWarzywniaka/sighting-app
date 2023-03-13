@@ -13,10 +13,15 @@
 
     <% for(let i=0; i<data.length; i++) {%>
         <li>
-            <span><%= data[i].description%></span>
+<!--            <span><%= data[i].description%></span>-->
+            <% let datetime = new Date(data[i].last_seen) %>
+            <% let date = datetime.toLocaleDateString('default', { day:"2-digit",month: 'long',year:"numeric" }) %>
+            <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
+            <span><%=`${date} ${time}`%></span>
+            <span><%=data[i].identification%></span>
             <span><%= data[i].username %></span>
-            <span><%= data[i].last_seen %></span>
-            <span><%= data[i].location %></span>
+<!--            <span><%=// data[i].location.coordinates[0] %></span>  <- shows longitude -->
+<!--            <span><%= //data[i].location.coordinates[1] %></span> <- shows latitude-->
         </li>
     <% } %>
 </ul>

@@ -6,12 +6,17 @@ let path = require('path');
 
 exports.create = function (req, res) {
     let userData = req.body;
+    // splits location field into longitude and latitude
+    let loc = req.body.location.split(",");
     let sighting = new Sighting({
-
-        descritpion: userData.descritpion,
+        identification: userData.identification,
+        description: userData.description,
         username: userData.username,
         last_seen: userData.last_seen,
-        location: userData.location
+        location: {
+            type: "Point",
+            coordinates: [parseFloat(loc[0]), parseFloat(loc[1])]
+        },
     });
 
     sighting.save(function (err, results) {
@@ -19,9 +24,9 @@ exports.create = function (req, res) {
             console.log(err)
             res.status(500).send(err);
         }
-            
-        res.json({sighting: sighting});
+
     });
+    res.redirect('/');
 };
 
 exports.find = function(req, res) {

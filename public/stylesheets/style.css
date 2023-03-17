@@ -1,7 +1,32 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 20px "Poppins", Helvetica, Arial, sans-serif;
+  
 }
+
+
+#ournav {
+  background-color: #ffffff;
+}
+
+#tab {
+  color: #2579b6;
+}
+
+
+#logo{
+  font: 50px;
+  color: #2579b6;
+  font-weight: bold;
+}
+
+
+.navbar-text {
+  color: #675352;
+  font-size: 14px;
+}
+
+
 
 a {
   color: #00B7FF;
@@ -12,3 +37,33 @@ a {
   width: 50%;
 }
 
+#active {
+  background-color: #ebf2f7
+}
+
+
+
+
+thead {
+  background-color: #675352;
+  color: white;
+}
+
+#head {
+  background-color: #ebf2f7;
+  color: #675352;
+}
+
+
+td {
+  
+  background-color: #ebf2f7;
+  color: #675352;
+}
+
+button{
+  background-color: #617d57;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}

@@ -9,22 +9,26 @@
 <body>
 <h1><%= title %></h1>
 
-<ul>
-
+<table>
+    <tr>
+        <th>Date and time:</th>
+        <th>Identification:</th>
+        <th>Recorded by user:</th>
+    </tr>
     <% for(let i=0; i<data.length; i++) {%>
-        <li>
+        <tr>
 <!--            <span><%= data[i].description%></span>-->
             <% let datetime = new Date(data[i].last_seen) %>
             <% let date = datetime.toLocaleDateString('default', { day:"2-digit",month: 'long',year:"numeric" }) %>
             <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
-            <span><%=`${date} ${time}`%></span>
-            <span><%=data[i].identification%></span>
-            <span><%= data[i].username %></span>
+            <td><span><%=`${date} ${time}`%></span></td>
+            <td><span><%=data[i].identification%></span></td>
+            <td><span><%= data[i].username %></span></td>
 <!--            <span><%=// data[i].location.coordinates[0] %></span>  <- shows longitude -->
 <!--            <span><%= //data[i].location.coordinates[1] %></span> <- shows latitude-->
-        </li>
+        </tr>
     <% } %>
-</ul>
+</table>
 
 
 

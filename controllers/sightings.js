@@ -29,16 +29,13 @@ exports.create = function (req, res) {
     res.redirect('/');
 };
 
-exports.find = function(req, res) {
+exports.list_all = function(req, res) {
     let ret = []
     Sighting.find({},(err,sightings) => {
-        if (err){
+        if (err)
             console.log(err)
-        } else {
-            ret = sightings
-            console.log(`In controler ${ret}`);
+        else
             res.render('index', { title: 'My Form' , data:sightings});
-        }
     })
 
     return ret

@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let bodyParser= require("body-parser");
+let bodyParser = require("body-parser");
 
 
 let sighting = require('../controllers/sightings');
@@ -9,8 +9,7 @@ let sighting = require('../controllers/sightings');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  let result = sighting.find(req,res);
-  console.log(`In router: ${result}`);
+  sighting.list_all(req,res);
 });
 
 

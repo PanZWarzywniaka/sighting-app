@@ -8,6 +8,8 @@ exports.create = function (req, res) {
     let userData = req.body;
     // splits location field into longitude and latitude
     let loc = req.body.location.split(",");
+    let path = req.file.path.replace("public","")
+    
     let sighting = new Sighting({
         identification: userData.identification,
         description: userData.description,
@@ -17,6 +19,7 @@ exports.create = function (req, res) {
             type: "Point",
             coordinates: [parseFloat(loc[0]), parseFloat(loc[1])]
         },
+        img: path
     });
 
     sighting.save(function (err, results) {

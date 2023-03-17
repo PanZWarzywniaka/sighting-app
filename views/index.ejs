@@ -20,7 +20,11 @@
             <span><%=`${date} ${time}`%></span>
             <span><%=data[i].identification%></span>
             <span><%= data[i].username %></span>
-<!--            <span><%=// data[i].location.coordinates[0] %></span>  <- shows longitude -->
+            <span><img src="<%= data[i].img %>" width="100" height="100"></span>
+            
+            
+            <span></span>
+            <!-- <span><%=// data[i].location.coordinates[0] %></span>  <- shows longitude -->
 <!--            <span><%= //data[i].location.coordinates[1] %></span> <- shows latitude-->
         </li>
     <% } %>

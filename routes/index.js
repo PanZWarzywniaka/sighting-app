@@ -27,9 +27,9 @@ var upload = multer({ storage: storage });
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  sighting.list_all(req,res);
-});
+// router.get('/', function(req, res, next) {
+//   sighting.list_all(req,res);
+// });
 
 
 router.get('/sightings', function(req, res, next) {

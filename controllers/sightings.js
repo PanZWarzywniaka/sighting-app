@@ -27,9 +27,8 @@ exports.create = function (req, res) {
             console.log(err)
             res.status(500).send(err);
         }
-
+        res.redirect('/sightings');
     });
-    res.redirect('/');
 };
 
 exports.list_all = function(req, res) {
@@ -46,7 +45,7 @@ exports.list_all = function(req, res) {
 
 // load the data for a specific sighting
 exports.getSightingById = function (req,res,next) {
-    Sighting.findOne({_id:req.params.sightingId}, function(err,obj){
+    Sighting.findById(req.params.sightingId, function(err,obj){
         if (err)
             console.log(err)
         else

@@ -42,7 +42,7 @@
             <% let datetime = new Date(data[i].last_seen) %>
             <% let date = datetime.toLocaleDateString('default', { day:"2-digit",month: 'long',year:"numeric" }) %>
             <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
-            <th scope= "row" id = "head"><%=`${date} ${time}`%></th>
+            <th scope= "row" id = "head"><%=`${date} ${time}`%></td>
             <td><%=data[i].identification%></td>
             <td><%= data[i].username %></td>
             <td><img src="<%= data[i].img %>" width="100" height="100"></td>

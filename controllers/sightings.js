@@ -1,6 +1,7 @@
 let bodyParser = require("body-parser");
 //let req = require('request');
 let Sighting = require('../models/sightings');
+let Chat = require("./chats");
 let path = require('path');
 
 
@@ -49,7 +50,8 @@ exports.getSightingById = function (req,res,next) {
         if (err)
             console.log(err)
         else
-            res.render('sighting.ejs',{title:'View A sighting',data:obj});
+            Chat.list_all(req,res,obj,req.params.sightingId);
+            // res.render('sighting',{title:'View A sighting',data:obj, chats:chats});
     });
 };
 

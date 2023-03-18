@@ -9,6 +9,9 @@ let socket = io();
  * plus the associated actions
  */
 function init() {
+    // scroll to the bottom of the chat div
+    let chatDiv = document.getElementById("history");
+    chatDiv.scrollTop = chatDiv.scrollHeight;
     //set all the values
     // will change value when username stored in cookie/indexDB
     name = document.getElementById('name').innerHTML;
@@ -25,7 +28,7 @@ function init() {
             //hideLoginInterface(room, userId);
         } else {
             // notifies that someone has joined the room
-            writeOnHistory('<b>'+userId+'</b>' + ' joined the room ');
+            writeOnHistory(userId,' has joined the room ', true);
         }
     });
     // called when a message is received
@@ -33,11 +36,11 @@ function init() {
         name = document.getElementById('name').innerHTML;
         let who = userId
         if (userId === name) who = 'Me';
-        writeOnHistory('<b>' + who + ':</b> ' + chatText);
+        writeOnHistory(userId, chatText,false);
     });
     /// Called when someone leaves the room
     socket.on('left', function (room, userId) {
-        writeOnHistory('<b>' + userId + ':</b> ' + ' has left the room');
+        writeOnHistory(userId,'has left the room',true);
     });
 
 }
@@ -52,7 +55,7 @@ function sendChatText() {
     console.log(`room number is: ${roomNo}`)
     socket.emit('chat',userId,roomNo,chatText);
     let who = 'Me:'
-    writeOnHistory('<b>' + who + '</b> ' + chatText);
+    writeOnHistory(who, chatText,false);
 }
 
 
@@ -69,13 +72,42 @@ function connectToRoom() {
 
 /**
  * it appends the given html text to the history div
- * @param text: teh text to append
+ * @param userId: the userId of the person sending the message
+ * @param text: the text to append
+ * @param isChatRoomNotif: boolean showing ifthe text is a message or a chatroom notification
+ * chatroom notification lets users know if a user has joined or left the room
+ *
  */
-function writeOnHistory(text) {
-    let history = document.getElementById('history');
-    let paragraph = document.createElement('p');
-    paragraph.innerHTML = text;
-    history.appendChild(paragraph);
+function writeOnHistory(userId,text,isChatRoomNotif) {
+    let chatTable = document.getElementById('chat_history');
+    // formatting date
+    let datetime = new Date();
+    let date = datetime.toLocaleDateString();
+    let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"});
+    // inserting row as last element in table
+    let chatRow = chatTable.insertRow(-1);
+
+    if (!isChatRoomNotif){
+        // creating three cells to insert into table
+        let username = chatRow.insertCell(0).innerText = userId ;
+        let message = chatRow.insertCell(1).innerText = text;
+        let created = chatRow.insertCell(2).innerText = `${date} ${time}` ;
+    } else {
+        // Creating a single cell with the chatroom notification showing
+        let notif = chatRow.insertCell(0);
+        let created = chatRow.insertCell(1);
+        created.innerText = `${date} ${time}` ;
+        created.setAttribute("style","color:red;");
+        notif.innerText = `${userId} ${text}` ;
+        notif.colSpan = 2;
+        notif.setAttribute("style","color:red;");
+    }
+
+
+    // paragraph.innerHTML = text;
+    // history.appendChild(paragraph,history);
+    let chatDiv = document.getElementById("history");
+    chatDiv.scrollTop = chatDiv.scrollHeight;
     document.getElementById('chat_input').value = '';
 }
 

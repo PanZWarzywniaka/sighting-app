@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="/javascripts/chat.js"></script>
+</head>
+<body onload="init()">
+<p id="roomNumber" style="display:none;"><%=data._id%></p>
+<p id="name" style="display: none"><%=`User${Math.round(Math.random() * 10000)}`%></p>
+<h1><%= data.username %></h1>
+<div id="chat_interface" >
+    <div>
+        <div id="who_you_are" style="display: inline"></div> Chat for <%=data.username%>'s sighting: <div id="in_room" style="display: inline"></div>
+    </div>
+    <div id="history" class="boxed"></div>
+    <div id="input" class="bottom boxed">
+        <form onsubmit="return false;" style="width: 100%">
+            <p>
+                <label for="name"> chat: </label>
+                <input type="text" id="chat_input" name="chat_input" style="width: 80%">
+                <button id="chat_send" onclick="sendChatText()">Send</button>
+            </p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

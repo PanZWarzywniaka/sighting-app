@@ -44,6 +44,16 @@ exports.list_all = function(req, res) {
     return ret
 };
 
+// load the data for a specific sighting
+exports.getSightingById = function (req,res,next) {
+    Sighting.findOne({_id:req.params.sightingId}, function(err,obj){
+        if (err)
+            console.log(err)
+        else
+            res.render('sighting.ejs',{title:'View A sighting',data:obj});
+    });
+};
+
 
 
 

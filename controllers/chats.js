@@ -11,14 +11,10 @@ exports.create = function (chatData) {
         message: chatData.message,
         created_at: chatData.created_at
     });
-    //chat.sightingId.push(chatData.sightingId);
 
     chat.save(function (err, results) {
-        if (err) {
+        if (err)
             console.log(err)
-        } else {
-            console.log('Chat has been successfully saved !')
-        }
     });
 };
 
@@ -32,13 +28,3 @@ exports.list_all = function(req,res,sightingObj,sightingId) {
     })
     return ret;
 };
-
-// load the data for a specific sighting
-// exports.getSightingById = function (req,res,next) {
-//     Sighting.findById(req.params.sightingId, function(err,obj){
-//         if (err)
-//             console.log(err)
-//         else
-//             res.render('sighting.ejs',{title:'View A sighting',data:obj});
-//     });
-// };

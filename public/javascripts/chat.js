@@ -9,17 +9,14 @@ let socket = io();
  * plus the associated actions
  */
 function init(sightingData, username) {
-    console.log(`Sighting data is: ${sightingData.username}`);
     // scroll to the bottom of the chat div
     let chatDiv = document.getElementById("history");
     chatDiv.scrollTop = chatDiv.scrollHeight;
     //set all the values
     // will change value when username stored in cookie/indexDB
     name = username;
-    console.log(`User name: ${name}`);
     // roomNo will be the id of the sighting
     roomNo = sightingData._id;
-    console.log(`Room num: ${roomNo}`);
     // Then connect to the room
     connectToRoom();
     // called when someone joins the room. If it is someone else it notifies the joining of the room
@@ -52,9 +49,8 @@ function init(sightingData, username) {
 function sendChatText() {
     let userId = name;
     let chatText = document.getElementById('chat_input').value;
-    console.log(`room number is: ${roomNo}`)
     socket.emit('chat',userId,roomNo,chatText);
-    let who = 'Me:'
+    let who = 'Me:';
     writeOnHistory(who, chatText,false);
 }
 

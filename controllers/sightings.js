@@ -51,7 +51,6 @@ exports.getSightingById = function (req,res,next) {
             console.log(err)
         else
             Chat.list_all(req,res,obj,req.params.sightingId);
-            // res.render('sighting',{title:'View A sighting',data:obj, chats:chats});
     });
 };
 

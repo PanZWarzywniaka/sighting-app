@@ -7,8 +7,6 @@ exports.init = function(io) {
              * create or joins a room
              */
             socket.on('create or join', function(room, userId) {
-                username = userId;
-                roomNumber = room;
                 socket.to(room).emit('joined',room, userId);
                 socket.join(room);
             });

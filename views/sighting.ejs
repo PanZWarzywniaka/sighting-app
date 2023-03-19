@@ -6,9 +6,9 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <script src="/javascripts/chat.js"></script>
 </head>
-<body onload="init()">
-<p id="roomNumber" style="display:none;"><%=data._id%></p>
-<p id="name" style="display: none"><%=`User${Math.round(Math.random() * 10000)}`%></p>
+<!--Will get users username from cookie-->
+<% let username = `User${Math.round(Math.random() * 10000)}`%>
+<body onload="init(<%= JSON.stringify(data) %>,'<%=username%>')">
 <h1><%= title  %></h1>
 <div id="chat_interface" >
     <div>

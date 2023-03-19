@@ -8,18 +8,19 @@ let socket = io();
  * it initialises the interface and the expected socket messages
  * plus the associated actions
  */
-function init() {
+function init(sightingData, username) {
+    console.log(`Sighting data is: ${sightingData.username}`);
     // scroll to the bottom of the chat div
     let chatDiv = document.getElementById("history");
     chatDiv.scrollTop = chatDiv.scrollHeight;
     //set all the values
     // will change value when username stored in cookie/indexDB
-    name = document.getElementById('name').innerHTML;
+    name = username;
     console.log(`User name: ${name}`);
-    // will be the id of the chat
-    roomNo = document.getElementById('roomNumber').innerHTML;
+    // roomNo will be the id of the sighting
+    roomNo = sightingData._id;
     console.log(`Room num: ${roomNo}`);
-    // Then conncect to the room
+    // Then connect to the room
     connectToRoom();
     // called when someone joins the room. If it is someone else it notifies the joining of the room
     socket.on('joined', function (room, userId) {
@@ -33,10 +34,9 @@ function init() {
     });
     // called when a message is received
     socket.on('chat', function (room, userId, chatText) {
-        name = document.getElementById('name').innerHTML;
         let who = userId
         if (userId === name) who = 'Me';
-        writeOnHistory(userId, chatText,false);
+        writeOnHistory(who, chatText,false);
     });
     /// Called when someone leaves the room
     socket.on('left', function (room, userId) {
@@ -50,7 +50,7 @@ function init() {
  * and sends the message via  socket
  */
 function sendChatText() {
-    let userId = document.getElementById('name').innerHTML;
+    let userId = name;
     let chatText = document.getElementById('chat_input').value;
     console.log(`room number is: ${roomNo}`)
     socket.emit('chat',userId,roomNo,chatText);
@@ -65,7 +65,7 @@ function sendChatText() {
  * - uses socket.emit('create or join') to join the room
  */
 function connectToRoom() {
-    let userId = document.getElementById('name').innerHTML;
+    let userId = name;
     socket.emit('create or join',roomNo,userId);
     //hideLoginInterface(roomNo, userId);
 }
@@ -93,19 +93,18 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
         let message = chatRow.insertCell(1).innerText = text;
         let created = chatRow.insertCell(2).innerText = `${date} ${time}` ;
     } else {
-        // Creating a single cell with the chatroom notification showing
+        // Creating cells with the chatroom notification and date showing
         let notif = chatRow.insertCell(0);
         let created = chatRow.insertCell(1);
         created.innerText = `${date} ${time}` ;
         created.setAttribute("style","color:red;");
         notif.innerText = `${userId} ${text}` ;
+        //let notification take up 2 cells
         notif.colSpan = 2;
         notif.setAttribute("style","color:red;");
     }
 
-
-    // paragraph.innerHTML = text;
-    // history.appendChild(paragraph,history);
+    //scroll to the bottom o div when new chat added
     let chatDiv = document.getElementById("history");
     chatDiv.scrollTop = chatDiv.scrollHeight;
     document.getElementById('chat_input').value = '';

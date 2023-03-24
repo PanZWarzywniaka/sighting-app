@@ -7,7 +7,7 @@
 let app = require('../app');
 let debug = require('debug')('sighting-app:server');
 let http = require('http');
-let database = require('../databases/sightings')
+let database = require('../databases/com3504')
 /**
  * Get port from environment and store in Express.
  */
@@ -88,3 +88,9 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+const io = require('socket.io')(server, {
+  pingTimeout: 60000,
+});
+var socket_module = require('../controllers/socket-io');
+socket_module.init(io, app);

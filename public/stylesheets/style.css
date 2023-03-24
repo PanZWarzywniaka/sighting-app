@@ -67,3 +67,28 @@ button{
   border: none;
   border-radius: 4px;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #EBF2F7;
+  padding: 10px;
+}
+
+
+
+.grid-item {
+  padding: 20px;
+  font-size: 30px;
+  font: 20px "Poppins", Helvetica, Arial, sans-serif;
+  color: #675352;
+  text-align: center;
+}
+
+
+.grid-item img {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    display: block;
+}

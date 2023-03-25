@@ -4,6 +4,23 @@ body {
 
 }
 
+#tab {
+  color: #2579b6;
+}
+
+
+#logo{
+  font: 50px;
+  color: #2579b6;
+  font-weight: bold;
+}
+
+
+.navbar-text {
+  color: #675352;
+  font-size: 14px;
+}
+
 
 #ournav {
   background-color: #ffffff;
@@ -25,8 +42,6 @@ body {
   color: #675352;
   font-size: 14px;
 }
-
-
 
 a {
   color: #00B7FF;
@@ -56,7 +71,6 @@ thead {
 
 
 td {
-
   background-color: #ebf2f7;
   color: #675352;
 }
@@ -68,5 +82,18 @@ button{
   border-radius: 4px;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #EBF2F7;
+  padding: 10px;
+}
+.grid-item {
+	font:20px "Poppins", Helvetica, Arial, sans-serif;
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    color: #675352;
 
-
+  
+}

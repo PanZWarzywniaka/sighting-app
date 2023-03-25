@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 
 //The URL which will be queried. Run "mongod.exe" for this to connect
 //let url = 'mongodb://localhost:27017/test';
-let mongoDB = 'mongodb://127.0.0.1:27017/sightings';
+let mongoDB = 'mongodb://127.0.0.1:27017/com3504';
 
 mongoose.Promise = global.Promise;
 

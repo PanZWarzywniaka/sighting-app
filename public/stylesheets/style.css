@@ -2,8 +2,25 @@
 body {
   padding: 50px;
   font: 20px "Poppins", Helvetica, Arial, sans-serif;
-  background-color: #ebf2f7
-  
+  background-color: #ebf2f7;
+  text-align: center;
+}
+
+#tab {
+  color: #2579b6;
+}
+
+
+#logo{
+  font-size: 50px;
+  color: #2579b6;
+  font-weight: bold;
+}
+
+
+.navbar-text {
+  color: #675352;
+  font-size: 24px;
 }
 
 
@@ -48,8 +65,19 @@ a {
 }
 /* Set the size of the div element that contains the map */
 #map {
-  height: 400px;
-  width: 50%;
+  height: 100%;
+  width: 100%;
+  alignment: center;
+}
+
+#map-container{
+  border-style: solid;
+  border-width: thin;
+  border-color: #675352;
+  margin: auto;
+  width: 500px;
+  height: 300px;
+
 }
 
 #active {
@@ -71,7 +99,6 @@ thead {
 
 
 td {
-  
   background-color: #ebf2f7;
   color: #675352;
 }
@@ -90,12 +117,8 @@ button{
 
 }
 
-
-
-
 .grid-item {
-  /* border: 1px solid rgba(0, 0, 0, 0.8);  */
-  /* padding: 5%; */
+
   font:  "Poppins", Helvetica, Arial, sans-serif;
   font-size: medium;
   color: #675352;
@@ -105,6 +128,27 @@ button{
 #bird_img {
   grid-row-start: 1;
   grid-row-end: 3;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #EBF2F7;
+  padding: 10px;
+}
+.grid-item {
+  font: 20px "Poppins", Helvetica, Arial, sans-serif;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  color: #675352;
+}
+
+.mydiv{
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1%;
 
 }
 
@@ -114,7 +158,6 @@ button{
 
 }
 
-
 #desc {
   padding-top: 5%;
   padding-bottom: 5%;
@@ -123,10 +166,6 @@ button{
 .grid-item img {
   display: block;
   width: 750px;
-  /* margin-top: 30%; */
-  /* margin-left: auto; */
-  /* margin-right: auto; */
-   
 }
 
 
@@ -147,11 +186,9 @@ button{
   padding: 1%;
 }
 
-
 #chat_interface {
   font-size: small;
 }
-
 
 #who_you_are {
   display: inline;
@@ -180,4 +217,91 @@ form {
 #chat_input {
   width: 80%;
 }
+
+.col-sm-2{
+  border-style: solid;
+
+}
+
+.div-label{
+
+  text-align: center;
+  background-color: #617d57;
+  font-size: 16px;
+  font-weight: lighter;
+  color: white;
+  width: 30%;
+
+}
+
+.div-input{
+  border-style: solid;
+  border-width: thin;
+  border-color: #617d57;
+  flex:1;
+  text-align: left;
+}
+
+#image-input{
+
+  display: flex;
+  justify-content: center;
+  margin-top: 1%;
+}
+
+#image-div {
+  display: block;
+
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+#image-label{
+  margin: auto;
+  width: 50%;
+
+  font-size: 16px;
+  text-align: center;
+  color: white;
+  background-color: #617d57;
+  padding: 1%;
+}
+
+#g {
+  background-color: #675352;
+  color: white;
+  font-size: 21px;
+  width: 172px;
+  height: 44px;
+}
+
+.form-horizontal{
+  width: 50%;
+  margin: auto;
+  margin-top: 3%;
+}
+
+.input{
+  width: 100%;
+  text-align: center;
+  color: #617d57;
+  font-size: 17px;
+  border: none;
+}
+
+#map-instructions {
+  background-color: #675352;
+  color: white;
+  margin: auto;
+  width: 500px;
+  margin-top: 3%;
+  margin-bottom: 1%;
+  padding: 0.5%;
+}
+
+#myImage {
+  font-size: 17px;
+  color: #617d57;
+}
+
 

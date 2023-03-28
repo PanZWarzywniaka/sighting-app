@@ -1,7 +1,6 @@
 body {
   padding: 50px;
   font: 20px "Poppins", Helvetica, Arial, sans-serif;
-  /*margin: 0 auto;*/
   text-align: center;
 }
 
@@ -96,12 +95,11 @@ button{
 }
 
 .mydiv{
-  /*border-style: solid;*/
+
   display: flex;
   flex-wrap: wrap;
   margin-top: 1%;
-  /*width: 50%;*/
-  /*margin: auto;*/
+
 }
 
 
@@ -113,10 +111,7 @@ button{
 
 .div-label{
 
-  /*flex: 1;*/
   text-align: center;
-  /*margin-right: 4%;*/
-  /*margin-left: 200px;*/
   background-color: #617d57;
   font-size: 16px;
   font-weight: lighter;
@@ -131,7 +126,6 @@ button{
   border-color: #617d57;
   flex:1;
   text-align: left;
- /* margin-right: 200px;*/
 }
 
 #image-input{
@@ -167,14 +161,6 @@ button{
   height: 44px;
 }
 
-/*
-.form-container{
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 600px; set a maximum width for the container element
-}*/
-
 .form-horizontal{
   width: 50%;
   margin: auto;
@@ -203,13 +189,5 @@ button{
   font-size: 17px;
   color: #617d57;
 }
-
-/*
-#xForm{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}*/
-
 
 

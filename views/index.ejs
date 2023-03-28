@@ -20,7 +20,8 @@
             <li id="active"><a href="#">Recent</a></li>
             <li id = "tab"><a href="#">Nearby</a></li>
           </ul>
-          <span class = "navbar-text navbar-right">Hello Nickname</span>
+          <% let username = `User${Math.round(Math.random() * 10000)}`%>
+          <span id = "navtext" class = "navbar-text navbar-right">Hello <%=username%> </span>
         </div>
         
       </nav>

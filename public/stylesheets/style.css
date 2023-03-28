@@ -1,6 +1,8 @@
+
 body {
   padding: 50px;
   font: 20px "Poppins", Helvetica, Arial, sans-serif;
+  background-color: #ebf2f7;
   text-align: center;
 }
 
@@ -22,13 +24,41 @@ body {
 }
 
 
+
+.grid-container-one h2 {
+  font-weight: 900;
+}
+
+
 #ournav {
   background-color: #ffffff;
+}
+
+#navtext {
+  margin-right: 5%;
 }
 
 #tab {
   color: #2579b6;
 }
+
+
+#logo{
+  font-size: large;
+  color: #2579b6;
+  font-weight: bold;
+}
+
+
+.navbar-text {
+  color: #675352;
+  font-size: 14px;
+}
+
+#section {
+  background-color: #ffffff;
+}
+
 
 a {
   color: #00B7FF;
@@ -80,6 +110,26 @@ button{
   border-radius: 4px;
 }
 
+.grid-container-one {
+ display:grid;
+  grid-template-columns: auto auto;
+  background-color: #ffffff;
+
+}
+
+.grid-item {
+
+  font:  "Poppins", Helvetica, Arial, sans-serif;
+  font-size: medium;
+  color: #675352;
+  text-align: center;
+}
+
+#bird_img {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto;
@@ -103,6 +153,70 @@ button{
 }
 
 
+#location {
+  padding-top: 5%;
+
+}
+
+#desc {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.grid-item img {
+  display: block;
+  width: 750px;
+}
+
+
+
+
+#chat {
+  background-color: #D9E1D6;
+  width: 100%;
+  font:  "Poppins", Helvetica, Arial, sans-serif;
+  font-size: medium;
+  color: #675352;
+  text-align: center;
+}
+
+#chat h2 {
+  color: #ffffff;
+  background-color: #617D57;
+  padding: 1%;
+}
+
+#chat_interface {
+  font-size: small;
+}
+
+#who_you_are {
+  display: inline;
+}
+
+#history {
+  overflow-y: scroll; 
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%; 
+  height: 100%; 
+  border: blue solid 1px; 
+  position: relative;
+
+}
+
+#chat_history {
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+
+#chat_input {
+  width: 80%;
+}
 
 .col-sm-2{
   border-style: solid;

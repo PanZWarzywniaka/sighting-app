@@ -3,44 +3,101 @@
 <head>
     <title><%= title %></title>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
     <script src="/javascripts/chat.js"></script>
 </head>
 <!--Will get users username from cookie-->
 <% let username = `User${Math.round(Math.random() * 10000)}`%>
 <body onload="init(<%= JSON.stringify(data) %>,'<%=username%>')">
-<h1><%= title  %></h1>
-<div id="chat_interface" >
-    <div>
-        <div id="who_you_are" style="display: inline"></div> Chat for <%=data.username%>'s sighting: <div id="in_room" style="display: inline"></div>
-    </div>
-    <br>
-    <div id="history" style="overflow-y: scroll; width: 100%; height: 400px; border: blue solid 1px; position: relative;"   class="boxed">
-        <table id="chat_history" style="width: 100%;">
-            <% for(let i=0; i<chats.length; i++) {%>
-                <tr>
-                    <% let datetime = new Date(chats[i].created_at) %>
-                    <% let date = datetime.toLocaleDateString() %>
-                    <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
-<!--                    Will change username to 'me' if username in cookie same as current username-->
-                    <td><%= chats[i].username%></td>
-                    <td style="word-break: break-all;"><%= chats[i].message%></td>
-                    <td><%= `${date} ${time}` %></td>
-                </tr>
-            <% } %>
-        </table>
-    </div>
-    <div id="input" style=" width: 100%; position: absolute; bottom: 10px;" class="bottom boxed">
-        <form onsubmit="return false;" style="width: 100%">
-            <p>
-                <label for="name"> chat: </label>
-                <input type="text" id="chat_input" name="chat_input" style="width: 80%">
-                <button id="chat_send" onclick="sendChatText()">Send</button>
-            </p>
-        </form>
-    </div>
+    <% let datetime = new Date() %>
+    <% let date_today = datetime.toLocaleDateString() %>
+    <% let time_now = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
 
+    <nav class="navbar navbar-default" id = "ournav">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" id="logo" href="#"><%= data.identification %></a>
+          </div>
+          <span id = "navtext" class = "navbar-text navbar-right">Date/Time: <%=`${date_today} ${time_now}`%> </span>
+        </div>
+        
+      </nav>
 
+    <div class="grid-container-one">
+        <div class="grid-item " id = "bird_img"><img src="<%= data.img %>"></div>
+        <div class="grid-item" id = "location">
+        <h2>Location</h2>
+        <p>(<%= data.location.coordinates %>)</p>
+        </div>
+        <div id = "desc" class = "grid-item" >
+            <h2>Description</h2>
+            <p><%= data.description %></p>
+            
+        </div>
+
+    </div>
 </div>
+
+<div id = "section">
+    <div id = "chat" >
+        <h2>Chatroom</h2>
+        <div id="chat_interface" >
+            <div>
+                <div id="who_you_are"></div> 
+                <span>Chat for <%=data.username%>'s sighting: </span>
+            </div>
+            <br>
+            <div id="history" class="boxed">
+                <table id="chat_history" >
+                    <% for(let i=0; i<chats.length; i++) {%>
+                        <tr>
+                            <% let datetime = new Date(chats[i].created_at) %>
+                            <% let date = datetime.toLocaleDateString() %>
+                            <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
+        <!--                    Will change username to 'me' if username in cookie same as current username-->
+                            <td><%= chats[i].username%></td>
+                            <td style="word-break: break-all;"><%= chats[i].message%></td>
+                            <td><%= `${date} ${time}` %></td>
+                        </tr>
+                    <% } %>
+                </table>
+            </div>
+            <br>
+            <div id="input"  class="bottom boxed">
+                <form onsubmit="return false;" >
+                    <p>
+                        <label for="name"> chat: </label>
+                        <input type="text" id="chat_input" name="chat_input">
+                        <button id="chat_send" onclick="sendChatText()">Send</button>
+                    </p>
+                </form>
+               
+            </div>
+            <br>
+        </div>  
+       
+      </div>
+    </div>
+</div>
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

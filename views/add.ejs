@@ -2,35 +2,46 @@
 <html>
 <head>
     <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 <body>
-<h1><%= title %></h1>
-<p>Click on the map to add a marker.</p>
-<div id="map"></div>
+<nav class="navbar navbar-default" id = "ournav">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" id="logo" href="#"><%= title %></a>
+        </div>
+        <span class = "navbar-text navbar-right">Hello Nickname</span>
+    </div>
 
-<form id="xForm" method="post" action="/add" enctype="multipart/form-data">
-    <p>
-        <label for="identification">Identification:</label>
-        <input type="text" name="identification" id="identification" placeholder="Input identification">
-    </p>
-    <p>
-        <label for='description'>Description:</label>
-        <input type="text" name="description" id="description" placeholder="Enter description here">
-    </p>
-    <p>
-        <label for='username'>Your username:</label>
-        <input type="text" name="username" id="username" placeholder="Your username">
-    </p>
-    <p>
-        <label for='last_seen'>Last seen:</label>
-        <input type="datetime-local" name="last_seen" id="last_seen">
-    </p>
-    <p>
-        <label for="myImage">Choose an image: </label>
-        <input type="file" id="myImage" name="myImg" accept="image/*" required>
-    </p>
+</nav>
+<p id="map-instructions">Click on the map to add a marker.</p>
+<div id="map-container"><div id="map"></div></div>
+
+
+<form class="form-inline form-horizontal" id="xForm" method="post" action="/add" enctype="multipart/form-data">
+    <div class="mydiv">
+        <div class="div-label"><label class="control-label " for="identification">Identification:</label></div>
+        <div class="div-input"><input class="input" type="text" name="identification" id="identification" placeholder="Input identification"></div>
+    </div>
+    <div class="mydiv">
+        <div class="div-label"><label class="control-label" for='description'>Description:</label></div>
+        <div class="div-input"><input class="input" type="text" name="description" id="description" placeholder="Enter description here"></div>
+    </div>
+    <div class="mydiv">
+        <div class="div-label"><label class="control-label" for='username'>Your username:</label></div>
+        <div class="div-input"><input class="input" type="text" name="username" id="username" placeholder="Your username"></div>
+    </div>
+    <div class="mydiv">
+        <div class="div-label"><label class="control-label" for='last_seen'>Last seen:</label></div>
+        <div class="div-input"><input class="input" type="datetime-local" name="last_seen" id="last_seen"></div>
+    </div>
+    <div id="image-div">
+        <div><label id="image-label" class="control-label" for="myImage">Choose an image: </label></div>
+        <div id="image-input"><input type="file" id="myImage" name="myImg" accept="image/*" required></div>
+    </div>
     <input type="hidden" name="location" id="location">
 
     <p><input type="submit" name="g" value="Submit" id="g"></p>

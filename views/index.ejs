@@ -2,33 +2,60 @@
 <html>
 <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
+
 <body>
-<h1><%= title %></h1>
 
-<ul>
+    <nav class="navbar navbar-default" id = "ournav">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" id="logo" href="#"><%= title %></a>
+          </div>
+          <ul class="nav navbar-nav" >
+            <li id="active"><a href="#">Recent</a></li>
+            <li id = "tab"><a href="#">Nearby</a></li>
+          </ul>
+          <% let username = `User${Math.round(Math.random() * 10000)}`%>
+          <span id = "navtext" class = "navbar-text navbar-right">Hello <%=username%> </span>
+        </div>
+        
+      </nav>
 
+<table class="table">
+    <thead >
+        <tr>
+          <th scope="col">Date/Time</th>
+          <th scope="col">Identication</th>
+          <th scope="col">User</th>
+          <th scope="col">Image</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        
     <% for(let i=0; i<data.length; i++) {%>
-        <li>
-<!--            <span><%= data[i].description%></span>-->
+        <tr>
             <% let datetime = new Date(data[i].last_seen) %>
             <% let date = datetime.toLocaleDateString('default', { day:"2-digit",month: 'long',year:"numeric" }) %>
             <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
-            <span><%=`${date} ${time}`%></span>
-            <span><%=data[i].identification%></span>
-            <span><%= data[i].username %></span>
-            <span><img src="<%= data[i].img %>" width="100" height="100"></span>
-            
-            
-            <span></span>
-            <!-- <span><%=// data[i].location.coordinates[0] %></span>  <- shows longitude -->
-<!--            <span><%= //data[i].location.coordinates[1] %></span> <- shows latitude-->
-        </li>
+            <th scope= "row" id = "head"><%=`${date} ${time}`%></td>
+            <td><%=data[i].identification%></td>
+            <td><%= data[i].username %></td>
+            <td><img src="<%= data[i].img %>" width="100" height="100"></td>
+            <td><button type="button">
+                    <a style="color:  white;" href = "/sightings/<%=data[i]._id%>">View</a>
+                </button></td>
+        </tr>
     <% } %>
-</ul>
+</table>
+
+
+
 
 
 

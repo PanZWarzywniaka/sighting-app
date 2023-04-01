@@ -44,6 +44,30 @@ exports.list_all = function(req, res) {
     return ret
 };
 
+exports.list_nearby = function(req, res, next) {
+    // get position of current user to find the nearest sightings
+    let userLocation=[-1.4701,53.3811];
+    Sighting.aggregate
+    ([
+        {
+            $geoNear: {
+                near: {
+                    type: "Point",
+                    coordinates: userLocation
+                },
+                distanceField: "dist.calculated"
+            }
+        }
+    ])
+        .exec(function (err, sightings) {
+            if (err) {
+                return next(err)
+            }
+            console.log(`hiii`)
+            res.render('index', {title: 'My Form', data: sightings});
+        });
+};
+
 // load the data for a specific sighting
 exports.getSightingById = function (req,res,next) {
     Sighting.findById(req.params.sightingId, function(err,obj){

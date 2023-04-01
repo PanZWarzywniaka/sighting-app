@@ -27,6 +27,7 @@
       </nav>
 
     <div class="grid-container-one">
+        <h2>Location</h2>
         <% let loc =`${data.location.coordinates[0]},${data.location.coordinates[1]}` %>
         <div class="grid-item " id = "bird_img"><img src="<%= data.img %>"></div>
         <div data-loc = "<%=loc%>" class="grid-item" id = "location">

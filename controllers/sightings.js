@@ -55,7 +55,7 @@ exports.list_nearby = function(req, res, next) {
                     type: "Point",
                     coordinates: userLocation
                 },
-                distanceField: "dist.calculated"
+                distanceField: "dist_calculated"
             }
         }
     ])
@@ -63,7 +63,6 @@ exports.list_nearby = function(req, res, next) {
             if (err) {
                 return next(err)
             }
-            console.log(`hiii`)
             res.render('index', {title: 'My Form', data: sightings});
         });
 };

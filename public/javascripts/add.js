@@ -30,6 +30,7 @@ function addMarker(position) {
     //create new marker
     marker = new google.maps.Marker({
         position,
+        icon: "/images/bird.png",
         map,
     });
     //add marker to the map

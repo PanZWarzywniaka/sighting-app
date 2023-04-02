@@ -6,7 +6,6 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(parseFloat(coords[1]),parseFloat(coords[0])),
         zoom: 16,
-        disableDefaultUI: true
     });
     const marker = new google.maps.Marker({
         position: new google.maps.LatLng(parseFloat(coords[1]),parseFloat(coords[0])),

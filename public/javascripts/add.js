@@ -2,8 +2,12 @@ let map;
 let marker;
 
 function initMap() {
-    map = new google.maps.Map(document.getElementById('map'),{});
-    map.setZoom(15);
+    map = new google.maps.Map(document.getElementById('map'),{
+        disableDefaultUI: true,
+        mapTypeId: 'hybrid',
+        zoomControl: true,
+        zoom: 15,
+    });
     // Get current users' location, center map to sheffield if error or user doesn't allow access to location
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {

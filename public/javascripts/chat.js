@@ -2,21 +2,6 @@ let name = null;
 let roomNo = null;
 let socket = io();
 
-function text2Colour(text) {
-    let hash = 0;
-    for (let i = 0; i < text.length; i++) {
-        hash = text.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    let colour = '';
-    for (let i = 0; i < 3; i++) {
-        let val= (hash >> (i * 8)) & 0xFF;
-        val = ('00' + val.toString(16));
-        colour += val.substring(val.length-2,val.length);
-    }
-    return colour;
-}
-
-
 /**
  * called by <body onload>
  * it initialises the interface and the expected socket messages
@@ -102,8 +87,6 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
 
         let img = document.createElement("img");
         img.setAttribute("alt", "Avatar");
-        let colour = text2Colour(username);
-        console.log(colour);
         let src = `https://ui-avatars.com/api/?rounded=true&background=random&name=${username}`;
         img.setAttribute("src", src);
 

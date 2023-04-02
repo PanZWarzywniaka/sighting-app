@@ -52,19 +52,31 @@
             </div>
             <br>
             <div id="history" class="boxed">
-                <table id="chat_history" >
+                <div id = "chat_history">
                     <% for(let i=0; i<chats.length; i++) {%>
-                        <tr>
-                            <% let datetime = new Date(chats[i].created_at) %>
-                            <% let date = datetime.toLocaleDateString() %>
-                            <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
-        <!--                    Will change username to 'me' if username in cookie same as current username-->
-                            <td><%= chats[i].username%></td>
-                            <td style="word-break: break-all;"><%= chats[i].message%></td>
-                            <td><%= `${date} ${time}` %></td>
-                        </tr>
-                    <% } %>
-                </table>
+                        <% let datetime = new Date(chats[i].created_at) %>
+                        <% let date = datetime.toLocaleDateString() %>
+                        <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
+                        <% let divClass =  (chats[i].username === username) ? "chatContainer":"chatContainer lighter";%>
+                        <% if(chats[i].username === username) {%>
+                            <div class="chatContainer lighter">
+                                <strong><%=chats[i].username%></strong>
+                                <span class="time-left"><%=date%></span>
+                                <img src="https://ui-avatars.com/api/?rounded=true&background=random&name=<%=chats[i].username%>" alt="Avatar" class="right" style="width:100%;">
+                                <p><%=chats[i].message%></p>
+                                <span class="time-left"><%=time%></span>
+                            </div>
+                        <% } else { %>
+                            <div class="chatContainer">
+                                <strong><%=chats[i].username%></strong>
+                                <span class="time-right"><%=date%></span>
+                                <img src="https://ui-avatars.com/api/?rounded=true&background=random&name=<%=chats[i].username%>" alt="Avatar" style="width:100%;">
+                                <p><%=chats[i].message%></p>
+                                <span class="time-right"><%=time%></span>
+                            </div>
+                        <% }%>
+                    <% }%>
+                </div>
             </div>
             <br>
             <div id="input"  class="bottom boxed">

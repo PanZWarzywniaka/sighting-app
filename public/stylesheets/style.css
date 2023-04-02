@@ -199,8 +199,7 @@ button{
   margin-left: auto;
   margin-right: auto;
   width: 100%; 
-  height: 100%; 
-  border: blue solid 1px; 
+  height: 300px;
   position: relative;
 
 }
@@ -304,4 +303,52 @@ form {
   color: #617d57;
 }
 
+
+/*Chat styling*/
+.chatContainer {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  overflow-wrap: break-word;
+  text-align: left;
+}
+
+.lighter {
+  border-color: #6f8269;
+  background-color: #e0ebdd;
+  text-align: right;
+}
+
+.chatContainer::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.chatContainer img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.chatContainer img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
 

@@ -2,6 +2,20 @@ let name = null;
 let roomNo = null;
 let socket = io();
 
+function text2Colour(text) {
+    let hash = 0;
+    for (let i = 0; i < text.length; i++) {
+        hash = text.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    let colour = '';
+    for (let i = 0; i < 3; i++) {
+        let val= (hash >> (i * 8)) & 0xFF;
+        val = ('00' + val.toString(16));
+        colour += val.substring(val.length-2,val.length);
+    }
+    return colour;
+}
+
 
 /**
  * called by <body onload>
@@ -50,7 +64,7 @@ function sendChatText() {
     let userId = name;
     let chatText = document.getElementById('chat_input').value;
     socket.emit('chat',userId,roomNo,chatText);
-    let who = 'Me:';
+    let who = 'Me';
     writeOnHistory(who, chatText,false);
 }
 
@@ -74,47 +88,71 @@ function connectToRoom() {
  * chatroom notification lets users know if a user has joined or left the room
  *
  */
+
 function writeOnHistory(userId,text,isChatRoomNotif) {
-    let chatTable = document.getElementById('chat_history');
-    // formatting date
-    let datetime = new Date();
-    let date = datetime.toLocaleDateString();
-    let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"});
-    // inserting row as last element in table
-    let chatRow = chatTable.insertRow(-1);
+    let chatHistory = document.getElementById('chat_history');
+    if (!isChatRoomNotif) {
+        let datetime = new Date();
+        let date = datetime.toLocaleDateString();
+        let time = datetime.toLocaleTimeString('default', {hour: "numeric", minute: "numeric"});
+        let username = (userId === "Me") ? name : userId;
 
-    if (!isChatRoomNotif){
-        // creating three cells to insert into table
-        let username = chatRow.insertCell(0).innerText = userId ;
-        let message = chatRow.insertCell(1).innerText = text;
-        let created = chatRow.insertCell(2).innerText = `${date} ${time}` ;
+        let isCurrentUser = userId === "Me";
+        let chat = document.createElement('div');
+
+        let img = document.createElement("img");
+        img.setAttribute("alt", "Avatar");
+        let colour = text2Colour(username);
+        console.log(colour);
+        let src = `https://ui-avatars.com/api/?rounded=true&background=random&name=${username}`;
+        img.setAttribute("src", src);
+
+        let strong = document.createElement("strong");
+        strong.append(document.createTextNode(userId));
+
+        let msg = document.createElement("p");
+        msg.append(document.createTextNode(text));
+
+        let spanDate = document.createElement("span");
+        spanDate.append(document.createTextNode(date));
+
+        let spanTime = document.createElement("span");
+        spanTime.append(document.createTextNode(time));
+
+        if (isCurrentUser) {
+            chat.setAttribute('class', 'chatContainer lighter');
+            img.setAttribute("class", "right");
+            spanDate.setAttribute("class", "time-left");
+            spanTime.setAttribute("class", "time-left");
+        } else {
+            chat.setAttribute('class', 'chatContainer');
+            img.setAttribute("class", "left");
+            spanDate.setAttribute("class", "time-right");
+            spanTime.setAttribute("class", "time-right");
+        }
+
+        // add the elements to the chat div
+        chat.appendChild(strong);
+        chat.appendChild(spanDate);
+        chat.appendChild(img);
+        chat.appendChild(msg);
+        chat.appendChild(spanTime);
+
+        chatHistory.appendChild(chat);
+
+
     } else {
-        // Creating cells with the chatroom notification and date showing
-        let notif = chatRow.insertCell(0);
-        let created = chatRow.insertCell(1);
-        created.innerText = `${date} ${time}` ;
-        created.setAttribute("style","color:red;");
-        notif.innerText = `${userId} ${text}` ;
-        //let notification take up 2 cells
-        notif.colSpan = 2;
-        notif.setAttribute("style","color:red;");
+        let announcement = document.createElement("p");
+        announcement.append(document.createTextNode(userId + " " + text));
+        announcement.setAttribute("style", "color:red;");
+        chatHistory.appendChild(announcement);
     }
-
-    //scroll to the bottom o div when new chat added
+    // scroll to the bottom of div
     let chatDiv = document.getElementById("history");
     chatDiv.scrollTop = chatDiv.scrollHeight;
     document.getElementById('chat_input').value = '';
 }
 
-/**
- * it hides the initial form and shows the chat
- * @param room the selected room
- * @param userId the user name
- */
-// function hideLoginInterface(room, userId) {
-//     document.getElementById('initial_form').style.display = 'none';
-//     document.getElementById('chat_interface').style.display = 'block';
-//     document.getElementById('who_you_are').innerHTML= userId;
-//     document.getElementById('in_room').innerHTML= ' '+room;
-// }
+
+
 

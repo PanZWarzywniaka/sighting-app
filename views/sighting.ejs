@@ -7,6 +7,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
     <script src="/javascripts/chat.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 <!--Will get users username from cookie-->
 <% let username = `User${Math.round(Math.random() * 10000)}`%>
@@ -26,10 +27,11 @@
       </nav>
 
     <div class="grid-container-one">
-        <div class="grid-item " id = "bird_img"><img src="<%= data.img %>"></div>
-        <div class="grid-item" id = "location">
         <h2>Location</h2>
-        <p>(<%= data.location.coordinates %>)</p>
+        <% let loc =`${data.location.coordinates[0]},${data.location.coordinates[1]}` %>
+        <div class="grid-item " id = "bird_img"><img src="<%= data.img %>"></div>
+        <div data-loc = "<%=loc%>" class="grid-item" id = "location">
+        <div id="map-container"><div id="map"></div></div>
         </div>
         <div id = "desc" class = "grid-item" >
             <h2>Description</h2>
@@ -81,23 +83,7 @@
       </div>
     </div>
 </div>
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
+<script src="/javascripts/sighting.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe2fdRMMdIhlmYYFXEup7lXGOV8lzm6qk&callback=initMap&v=weekly" defer></script>
 </html>

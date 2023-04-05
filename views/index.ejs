@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src ="/public/javascripts/index.js" ></script> -->
+
 
 </head>
 
@@ -16,14 +18,18 @@
             <a class="navbar-brand" id="logo" href="#"><%= title %></a>
           </div>
           <ul class="nav navbar-nav" >
-            <li id="active"><a href="/sightings">Recent</a></li>
-            <li id = "tab"><a href="/nearby">Nearby</a></li>
+            <li id="recent">
+              <a  class="nav-link" href="/recent" onclick="colorswitch()">Recent</a>
+            </li>
+            <li id ="nearby"class = "nav-item">
+              <a  class="nav-link" href="/nearby">Nearby</a></li>
           </ul>
           <% let username = `User${Math.round(Math.random() * 10000)}`%>
           <span id = "navtext" class = "navbar-text navbar-right">Hello <%=username%> </span>
         </div>
         
       </nav>
+      <p id="demo"></p>
     <% let sort_nearby = data[0].hasOwnProperty("dist_calculated") ;%>
     <table class="table table-hover">
         <thead >
@@ -67,3 +73,17 @@
 
 </body>
 </html>
+
+<script>
+  document.querySelector('#nearby').addEventListener('click',() => {
+    document.querySelector('#recent').classList.remove('active');
+    document.querySelector('#nearby').classList.add('active');
+    
+  })
+
+  function colorswitch() {
+    document.getElementById("demo").innerHTML = "Hello World";
+    document.getElementById("recent").innerHTML = element;
+    element.style.backgroundColor = "pink";
+  }
+</script>

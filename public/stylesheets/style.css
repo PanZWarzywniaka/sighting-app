@@ -6,9 +6,19 @@ body {
   text-align: center;
 }
 
-#tab {
+ 
+.active{
+  background-color: blue;
+}
+
+#nearby {
   color: #2579b6;
 }
+
+#recent {
+  color: #2579b6;
+}
+
 
 
 
@@ -62,10 +72,6 @@ a {
   width: 500px;
   height: 300px;
 
-}
-
-#active {
-  background-color: #ebf2f7
 }
 
 

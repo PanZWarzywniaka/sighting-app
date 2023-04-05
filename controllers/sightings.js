@@ -67,6 +67,20 @@ exports.list_nearby = function(req, res, next) {
         });
 };
 
+
+exports.list_recent = function(req, res, next) {
+    Sighting.find({}).sort({_id:-1})
+    .exec(function(err,sightings){
+            if (err) {
+                return next(err)
+            }
+            else 
+                res.render('index',{title: 'Bird Sightings', data: sightings})
+        })
+};
+
+
+
 // load the data for a specific sighting
 exports.getSightingById = function (req,res,next) {
     Sighting.findById(req.params.sightingId, function(err,obj){

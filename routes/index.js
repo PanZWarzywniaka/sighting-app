@@ -40,6 +40,9 @@ router.get('/nearby', function(req, res, next) {
     sighting.list_nearby(req,res,next);
 });
 
+router.get('/recent', function(req, res, next) {
+  sighting.list_recent(req,res,next);
+});
 
 router.get('/sightings/:sightingId',function(req,res,next){
   sighting.getSightingById(req,res,next);

@@ -21,8 +21,6 @@ function init(sightingData, username) {
     // called when someone joins the room. If it is someone else it notifies the joining of the room
     socket.on('joined', function (room, userId) {
         if (userId === name) {
-            // it enters the chat
-            //hideLoginInterface(room, userId);
         } else {
             // notifies that someone has joined the room
             writeOnHistory(userId,' has joined the room ', true);
@@ -43,7 +41,7 @@ function init(sightingData, username) {
 
 /**
  * called when the Send button is pressed. It gets the text to send from the interface
- * and sends the message via  socket
+ * and sends the message via socket
  */
 function sendChatText() {
     let userId = name;

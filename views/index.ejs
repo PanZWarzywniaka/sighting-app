@@ -19,12 +19,12 @@
           </div>
           <ul class="nav navbar-nav" >
             <li id="recent">
-              <a  class="nav-link" href="/recent" onclick="colorswitch()">Recent</a>
+              <a  class="nav-link" href="/recent">Recent</a>
             </li>
             <li id ="nearby"class = "nav-item">
               <a  class="nav-link" href="/nearby">Nearby</a></li>
             <li id ="mine"class = "nav-item">
-                <a  class="nav-link" href="/mine">Mine</a></li>
+                <a  class="nav-link active" href="/mine">Mine</a></li>
 
           </ul>
           <% let username = `User${Math.round(Math.random() * 10000)}`%>
@@ -98,8 +98,8 @@
     
   })
 
-  function colorswitch() {
-    document.getElementById("recent").innerHTML = element;
-    element.style.backgroundColor = "pink";
-  }
+  // function colorswitch() {
+  //   document.getElementById("recent").innerHTML = element;
+  //   element.style.backgroundColor = "pink";
+  // }
 </script>

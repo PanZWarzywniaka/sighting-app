@@ -23,20 +23,24 @@
             </li>
             <li id ="nearby"class = "nav-item">
               <a  class="nav-link" href="/nearby">Nearby</a></li>
+            <li id ="mine"class = "nav-item">
+                <a  class="nav-link" href="/mine">Mine</a></li>
+
           </ul>
           <% let username = `User${Math.round(Math.random() * 10000)}`%>
           <span id = "navtext" class = "navbar-text navbar-right">Hello <%=username%> </span>
         </div>
         
       </nav>
-      <p id="demo"></p>
+    <% if (data.length > 0) {%>
+
     <% let sort_nearby = data[0].hasOwnProperty("dist_calculated") ;%>
     <table class="table table-hover">
         <thead >
             <tr>
-              <% if (sort_nearby) {%>
+                <% if (sort_nearby) {%>
                 <th scope="col">Distance</th>
-              <% } %>
+                <% } %>
               <th scope="col">Date/Time</th>
               <th scope="col">Identication</th>
               <th scope="col">User</th>
@@ -46,9 +50,7 @@
             </tr>
         </thead>
         <tbody>
-          <% if (data.length == 0) {%>
-            <p> There Are Currently No Sightings.</p>
-            <% } %>
+         
             <% for(let i=0; i<data.length; i++) {%>
               
 
@@ -58,7 +60,7 @@
                     <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
                     <% if(sort_nearby) { %>
                       <td><%= (parseFloat(data[i].dist_calculated)/1000).toFixed(0) %> Km away</td>
-                  <% } %>
+                      <% } %>
                     <td id = "head"><%=`${date} ${time}`%></td>
                     <td><%=data[i].identification%></td>
                     <td><%= data[i].username %></td>
@@ -69,9 +71,16 @@
                         </button></td>
                 </tr>
             <% } %>
+            
         </tbody>
     </table>
-
+    <% } %>
+    <% if (data.length == 0) {%>
+      <p> There Are Currently 0 Sightings.</p>
+      <br>
+      <% } %>
+   
+      
 
     <button ><a style="color:  white;" href = "/add">Add A Sighting</a></button>
 
@@ -90,7 +99,6 @@
   })
 
   function colorswitch() {
-    document.getElementById("demo").innerHTML = "Hello World";
     document.getElementById("recent").innerHTML = element;
     element.style.backgroundColor = "pink";
   }

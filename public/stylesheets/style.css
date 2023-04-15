@@ -6,22 +6,19 @@ body {
   text-align: center;
 }
 
-#tab {
+ 
+.active{
+  background-color: blue;
+}
+
+#nearby {
   color: #2579b6;
 }
 
-
-#logo{
-  font-size: 50px;
+#recent {
   color: #2579b6;
-  font-weight: bold;
 }
 
-
-.navbar-text {
-  color: #675352;
-  font-size: 24px;
-}
 
 
 
@@ -38,9 +35,7 @@ body {
   margin-right: 5%;
 }
 
-#tab {
-  color: #2579b6;
-}
+
 
 
 #logo{
@@ -65,9 +60,8 @@ a {
 }
 /* Set the size of the div element that contains the map */
 #map {
-  height: 100%;
-  width: 100%;
-  alignment: center;
+  height: 400px;
+  width: 50%;
 }
 
 #map-container{
@@ -78,10 +72,6 @@ a {
   width: 500px;
   height: 300px;
 
-}
-
-#active {
-  background-color: #ebf2f7
 }
 
 
@@ -110,38 +100,11 @@ button{
   border-radius: 4px;
 }
 
-.grid-container-one {
- display:grid;
-  grid-template-columns: auto auto;
-  background-color: #ffffff;
-
-}
-
-.grid-item {
-
-  font:  "Poppins", Helvetica, Arial, sans-serif;
-  font-size: medium;
-  color: #675352;
-  text-align: center;
-}
-
-#bird_img {
-  grid-row-start: 1;
-  grid-row-end: 3;
-}
-
 .grid-container {
   display: grid;
   grid-template-columns: auto auto;
   background-color: #EBF2F7;
   padding: 10px;
-}
-.grid-item {
-  font: 20px "Poppins", Helvetica, Arial, sans-serif;
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-  color: #675352;
 }
 
 .mydiv{
@@ -152,71 +115,6 @@ button{
 
 }
 
-
-#location {
-  padding-top: 5%;
-
-}
-
-#desc {
-  padding-top: 5%;
-  padding-bottom: 5%;
-}
-
-.grid-item img {
-  display: block;
-  width: 750px;
-}
-
-
-
-
-#chat {
-  background-color: #D9E1D6;
-  width: 100%;
-  font:  "Poppins", Helvetica, Arial, sans-serif;
-  font-size: medium;
-  color: #675352;
-  text-align: center;
-}
-
-#chat h2 {
-  color: #ffffff;
-  background-color: #617D57;
-  padding: 1%;
-}
-
-#chat_interface {
-  font-size: small;
-}
-
-#who_you_are {
-  display: inline;
-}
-
-#history {
-  overflow-y: scroll; 
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%; 
-  height: 100%; 
-  border: blue solid 1px; 
-  position: relative;
-
-}
-
-#chat_history {
-  width: 100%;
-}
-
-form {
-  width: 100%;
-}
-
-
-#chat_input {
-  width: 80%;
-}
 
 .col-sm-2{
   border-style: solid;
@@ -304,4 +202,101 @@ form {
   color: #617d57;
 }
 
+
+
+.grid-container-one {
+ display:grid;
+  grid-template-columns: auto auto;
+  background-color: #ffffff;
+
+}
+
+
+.grid-item {
+  /* border: 1px solid rgba(0, 0, 0, 0.8);  */
+  /* padding: 5%; */
+  font:  "Poppins", Helvetica, Arial, sans-serif;
+  font-size: medium;
+  color: #675352;
+  text-align: center;
+}
+
+#bird_img {
+  grid-row-start: 1;
+  grid-row-end: 3;
+
+}
+
+
+#location {
+  padding-top: 5%;
+
+}
+
+
+#desc {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.grid-item img {
+  display: block;
+  width: 750px;
+  /* margin-top: 30%; */
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+   
+}
+
+
+
+
+#chat {
+  background-color: #D9E1D6;
+  width: 100%;
+  font:  "Poppins", Helvetica, Arial, sans-serif;
+  font-size: medium;
+  color: #675352;
+  text-align: center;
+}
+
+#chat h2 {
+  color: #ffffff;
+  background-color: #617D57;
+  padding: 1%;
+}
+
+
+#chat_interface {
+  font-size: small;
+}
+
+
+#who_you_are {
+  display: inline;
+}
+
+#history {
+  overflow-y: scroll; 
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%; 
+  height: 100%; 
+  border: blue solid 1px; 
+  position: relative;
+
+}
+
+#chat_history {
+  width: 100%;
+}
+
+form {
+  width: 100%;
+}
+
+
+#chat_input {
+  width: 80%;
+}
 

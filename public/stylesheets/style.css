@@ -1,4 +1,3 @@
-
 body {
   padding: 50px;
   font: 20px "Poppins", Helvetica, Arial, sans-serif;
@@ -6,22 +5,19 @@ body {
   text-align: center;
 }
 
-#tab {
+
+.active{
+  background-color: #ebf2f7;
+}
+
+#nearby {
   color: #2579b6;
 }
 
-
-#logo{
-  font-size: 50px;
+#recent {
   color: #2579b6;
-  font-weight: bold;
 }
 
-
-.navbar-text {
-  color: #675352;
-  font-size: 24px;
-}
 
 
 
@@ -112,7 +108,7 @@ button{
 }
 
 .grid-container-one {
- display:grid;
+  display:grid;
   grid-template-columns: auto auto;
   background-color: #ffffff;
 
@@ -198,11 +194,11 @@ button{
 }
 
 #history {
-  overflow-y: scroll; 
+  overflow-y: scroll;
   margin-left: auto;
   margin-right: auto;
-  width: 100%; 
-  height: 300px;
+  width: 100%;
+  height: 400px;
   position: relative;
 
 }
@@ -353,5 +349,4 @@ form {
 .time-left {
   float: left;
   color: #999;
-}
-
+}}

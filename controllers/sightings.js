@@ -38,7 +38,7 @@ exports.list_all = function(req, res) {
         if (err)
             console.log(err)
         else
-            res.render('index', { title: 'My Form' , data:sightings});
+            res.render('index', { title: 'Bird Sightings' , data:sightings});
     })
 
     return ret
@@ -63,9 +63,23 @@ exports.list_nearby = function(req, res, next) {
             if (err) {
                 return next(err)
             }
-            res.render('index', {title: 'My Form', data: sightings});
+            res.render('index', {title: 'Bird Sightings', data: sightings});
         });
 };
+
+
+exports.list_recent = function(req, res, next) {
+    Sighting.find({}).sort({last_seen:-1})
+    .exec(function(err,sightings){
+            if (err) {
+                return next(err)
+            }
+            else 
+                res.render('index',{title: 'Bird Sightings', data: sightings})
+        })
+};
+
+
 
 // load the data for a specific sighting
 exports.getSightingById = function (req,res,next) {

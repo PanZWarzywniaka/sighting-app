@@ -7,6 +7,15 @@ $(window).on('load', function() {
     readUsername()
 });
 
+const readUsernameSuccess = (ev) => {
+    username = ev.target.result.text
+    console.log("Saved username: ", username)
+    document.getElementById('username_display').innerText = `Hello ${username}`
+    document.getElementById('sightings_username').value = username //for add page
+
+}
+
+
 const handleSuccess = () => {
     console.log("Success")
     let save_btn = document.getElementById("saveUsername")
@@ -50,13 +59,7 @@ let readUsername = () => {
     const myStore = transaction.objectStore('usernames')
 
     let savedUsername = myStore.get(1) 
-    savedUsername.addEventListener("success", (ev) => {
-        username = ev.target.result.text
-        console.log("Saved username: ", username)
-        document.getElementById('username_display').innerText = `Hello ${username}`
-        document.getElementById('sightings_username').value = username //for add page
-        
-    })
+    savedUsername.addEventListener("success", readUsernameSuccess)
 
     savedUsername.addEventListener("error", (ev) => {
         console.error("There is no username in the database")

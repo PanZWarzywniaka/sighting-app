@@ -54,6 +54,7 @@ let readUsername = () => {
         username = ev.target.result.text
         console.log("Saved username: ", username)
         document.getElementById('username_display').innerText = `Hello ${username}`
+        document.getElementById('sightings_username').value = username //for add page
         
     })
 

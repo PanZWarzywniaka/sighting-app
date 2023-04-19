@@ -67,7 +67,7 @@ function connectToRoom() {
  * it appends the given html text to the history div
  * @param userId: the userId of the person sending the message
  * @param text: the text to append
- * @param isChatRoomNotif: boolean showing ifthe text is a message or a chatroom notification
+ * @param isChatRoomNotif: boolean showing if the text is a message or a chatroom notification
  * chatroom notification lets users know if a user has joined or left the room
  *
  */
@@ -78,17 +78,18 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
         let datetime = new Date();
         let date = datetime.toLocaleDateString();
         let time = datetime.toLocaleTimeString('default', {hour: "numeric", minute: "numeric"});
-        let username = (userId === "Me") ? name : userId;
 
         let isCurrentUser = userId === "Me";
-        let chat = document.createElement('div');
+        let username = isCurrentUser ? name : userId;
+
+        let chatBox = document.createElement('div');
 
         let img = document.createElement("img");
         img.setAttribute("alt", "Avatar");
         let src = `https://ui-avatars.com/api/?rounded=true&background=random&name=${username}`;
         img.setAttribute("src", src);
 
-        let strong = document.createElement("strong");
+        let strong = document.createElement("strong"); //makes bold letters
         strong.append(document.createTextNode(userId));
 
         let msg = document.createElement("p");
@@ -101,25 +102,25 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
         spanTime.append(document.createTextNode(time));
 
         if (isCurrentUser) {
-            chat.setAttribute('class', 'chatContainer lighter');
+            chatBox.setAttribute('class', 'chatContainer lighter');
             img.setAttribute("class", "right");
             spanDate.setAttribute("class", "time-left");
             spanTime.setAttribute("class", "time-left");
         } else {
-            chat.setAttribute('class', 'chatContainer');
+            chatBox.setAttribute('class', 'chatContainer');
             img.setAttribute("class", "left");
             spanDate.setAttribute("class", "time-right");
             spanTime.setAttribute("class", "time-right");
         }
 
-        // add the elements to the chat div
-        chat.appendChild(strong);
-        chat.appendChild(spanDate);
-        chat.appendChild(img);
-        chat.appendChild(msg);
-        chat.appendChild(spanTime);
+        // add the elements to the chatBox div
+        chatBox.appendChild(strong);
+        chatBox.appendChild(spanDate);
+        chatBox.appendChild(img);
+        chatBox.appendChild(msg);
+        chatBox.appendChild(spanTime);
 
-        chatHistory.appendChild(chat);
+        chatHistory.appendChild(chatBox);
 
 
     } else {

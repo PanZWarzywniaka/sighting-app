@@ -3,7 +3,7 @@
 <head>
     <title><%= title %></title>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins" />
     <script src="/javascripts/chat.js"></script>
@@ -19,27 +19,35 @@
     <nav class="navbar navbar-default" id = "ournav">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" id="logo" href="#"><%= data.identification %></a>
+              <a class="navbar-brand"  href="/sightings">Back</a>
           </div>
           <span id = "navtext" class = "navbar-text navbar-right">Date/Time: <%=`${date_today} ${time_now}`%> </span>
         </div>
         
       </nav>
 
-    <div class="grid-container-one">
-        <h2>Location</h2>
-        <% let loc =`${data.location.coordinates[0]},${data.location.coordinates[1]}` %>
-        <div class="grid-item " id = "bird_img"><img src="<%= data.img %>"></div>
-        <div data-loc = "<%=loc%>" class="grid-item" id = "location">
-        <div id="map-container"><div id="map"></div></div>
-        </div>
-        <div id = "desc" class = "grid-item" >
-            <h2>Description</h2>
-            <p><%= data.description %></p>
-            
-        </div>
+    <div class="container">
+        <h1 class="text-center"> <%= data.identification %> </h1>
 
+        <div class="row">
+            <div class="col">
+                <h3>Image Captured</h3>
+                <div class="grid-item" id = "bird_img"><img src="<%= data.img %>"></div>
+            </div>
+
+            <div class="col">
+                <h3>Location</h3>
+                <% let loc =`${data.location.coordinates[0]},${data.location.coordinates[1]}` %>
+                <div data-loc = "<%=loc%>" class="grid-item" id = "location">
+                    <div id="map-container"><div id="map"></div></div>
+                </div>
+            </div>
+        </div>
     </div>
+    <br>
+    <h3>Description</h3>
+    <p><%= data.description %></p>
+
 </div>
 
 <div id = "section">
@@ -52,19 +60,31 @@
             </div>
             <br>
             <div id="history" class="boxed">
-                <table id="chat_history" >
+                <div id = "chat_history">
                     <% for(let i=0; i<chats.length; i++) {%>
-                        <tr>
-                            <% let datetime = new Date(chats[i].created_at) %>
-                            <% let date = datetime.toLocaleDateString() %>
-                            <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
-        <!--                    Will change username to 'me' if username in cookie same as current username-->
-                            <td><%= chats[i].username%></td>
-                            <td style="word-break: break-all;"><%= chats[i].message%></td>
-                            <td><%= `${date} ${time}` %></td>
-                        </tr>
-                    <% } %>
-                </table>
+                        <% let datetime = new Date(chats[i].created_at) %>
+                        <% let date = datetime.toLocaleDateString() %>
+                        <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
+                        <% let divClass =  (chats[i].username === username) ? "chatContainer":"chatContainer lighter";%>
+                        <% if(chats[i].username === username) {%>
+                            <div class="chatContainer lighter">
+                                <strong><%=chats[i].username%></strong>
+                                <span class="time-left"><%=date%></span>
+                                <img src="https://ui-avatars.com/api/?rounded=true&background=random&name=<%=chats[i].username%>" alt="Avatar" class="right" style="width:100%;">
+                                <p><%=chats[i].message%></p>
+                                <span class="time-left"><%=time%></span>
+                            </div>
+                        <% } else { %>
+                            <div class="chatContainer">
+                                <strong><%=chats[i].username%></strong>
+                                <span class="time-right"><%=date%></span>
+                                <img src="https://ui-avatars.com/api/?rounded=true&background=random&name=<%=chats[i].username%>" alt="Avatar" style="width:100%;">
+                                <p><%=chats[i].message%></p>
+                                <span class="time-right"><%=time%></span>
+                            </div>
+                        <% }%>
+                    <% }%>
+                </div>
             </div>
             <br>
             <div id="input"  class="bottom boxed">
@@ -78,8 +98,8 @@
                
             </div>
             <br>
-        </div>  
-       
+        </div>
+
       </div>
     </div>
 </div>

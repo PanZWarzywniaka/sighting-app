@@ -1,7 +1,7 @@
 function sendAjaxQuery(url, data) {
 
     $.ajax({
-        url: url ,
+        url: url,
         data: data,
         dataType: 'json',
         type: 'POST',
@@ -12,7 +12,7 @@ function sendAjaxQuery(url, data) {
             let ret = dataR;
             // in order to have the object printed by alert
             // we need to JSON stringify the object
-            document.getElementById('results').innerHTML= JSON.stringify(ret);
+            document.getElementById('results').innerHTML = JSON.stringify(ret);
         },
         error: function (xhr, status, error) {
 
@@ -22,10 +22,10 @@ function sendAjaxQuery(url, data) {
 }
 
 function onSubmit() {
-    let formArray= $("form").serializeArray();
-    let data={};
-    for (index in formArray){
-        data[formArray[index].name]= formArray[index].value;
+    let formArray = $("form").serializeArray();
+    let data = {};
+    for (index in formArray) {
+        data[formArray[index].name] = formArray[index].value;
     }
     console.log(data);
     // const data = JSON.stringify($(this).serializeArray());
@@ -34,11 +34,13 @@ function onSubmit() {
 }
 
 $(document).ready(function () {
- 
+
     $('ul.navbar-nav > li')
-            .click(function (e) {
-        $('ul.navbar-nav > li')
-            .removeClass('active');
-        $(this).addClass('active');
-    });
-   });
+        .click(function (e) {
+            $('ul.navbar-nav > li')
+                .removeClass('active');
+            $(this).addClass('active');
+        });
+
+    $('#username-modal').modal('toggle')
+});

@@ -104,8 +104,8 @@
             <img src="<%= data[i].img %>" width="100" height="100">
           </td>
           <td>
-            <button type="button">
-              <a style="color:  white;" href="/sightings/<%=data[i]._id%>">View</a>
+            <button type="button" id="toSighting" onclick="toSighting('<%=data[i]._id%>')">
+              View
             </button>
           </td>
         </tr>

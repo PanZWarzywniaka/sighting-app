@@ -87,7 +87,7 @@ exports.getSightingById = function (req,res,next) {
         if (err)
             console.log(err)
         else
-            Chat.list_all(req,res,obj,req.params.sightingId);
+            Chat.list_all(req,res,obj,req.params.sightingId,req.query.username);
     });
 };
 

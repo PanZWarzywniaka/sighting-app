@@ -78,3 +78,7 @@ function colorswitch() {
     document.getElementById("recent").innerHTML = element;
     element.style.backgroundColor = "pink";
 }
+
+function toSighting(sightingId){
+    window.location.href = `/sightings/${sightingId}?username=${username}`;
+}

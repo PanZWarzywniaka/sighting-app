@@ -85,6 +85,7 @@ exports.list_recent = function(req, res, next) {
 
 exports.list_mine = function(req, res, next) {
     let name = req.body.username;
+    console.log(name);
     Sighting.find({username: name})
     
     .exec(function(err,sightings){

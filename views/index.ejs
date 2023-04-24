@@ -25,14 +25,27 @@
             <li id ="nearby"class = "nav-item">
               <a  class="nav-link" href="/nearby">Nearby</a></li>
             <li id ="mine"class = "nav-item">
-                <a  class="nav-link active" href="/mine">Mine</a></li>
+                <a  class="nav-link active" href="/mine" onclick="sendUserName()">Mine</a></li>
 
           </ul>
-          <% let username = `User${Math.round(Math.random() * 10000)}`%>
+          <% let username;%>
+          <% if (data.length > 0) {%>
+          <% username = data[0].username%>
+          <% } %>
+        <% if (data.length == 0) {%>
+          <% username = 'User'%>
+        <% } %>
+
+          <form id = "name-form" action = "/mine" method = "post">
+            <input name="username" id="username" value = <%=username%> >
+          </form>
           <span id = "navtext" class = "navbar-text navbar-right">Hello <%=username%> </span>
         </div>
         
       </nav>
+
+
+    
     <% if (data.length > 0) {%>
 
     <% let sort_nearby = data[0].hasOwnProperty("dist_calculated") ;%>

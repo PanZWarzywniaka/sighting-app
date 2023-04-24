@@ -33,6 +33,13 @@ function onSubmit() {
     event.preventDefault();
 }
 
+function sendUserName() {
+    document.getElementById("name-form").submit();
+      
+}
+
+
+
 $(document).ready(function () {
  
     $('ul.navbar-nav > li')

@@ -11,7 +11,11 @@ const readUsernameSuccess = (ev) => {
     username = ev.target.result.text
     console.log("Saved username: ", username)
     document.getElementById('username_display').innerText = `Hello ${username}`
-    document.getElementById('sightings_username').value = username //for add page
+    let add_username = document.getElementById('sightings_username');
+    if (add_username !== null)
+        add_username.value = username //for add page
+    document.getElementById('username').value = username;
+    mine();
 
 }
 
@@ -80,3 +84,14 @@ function colorswitch() {
     element.style.backgroundColor = "pink";
 }
 
+function mine(){
+    const userName = document.getElementById("username").value;
+    console.log(`The username is: ${userName}`);
+
+    const mineLink = document.getElementById('mine-link')
+    const submitButton = document.getElementById('submit-btn')
+    mineLink.addEventListener('click', function() {
+        submitButton.click();
+        console.log(userName);
+    });
+}

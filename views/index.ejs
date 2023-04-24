@@ -42,7 +42,7 @@
   </div>
 
   <form id = "name-form" action = "/mine" method = "post">
-     <input name="username" id="username"> 
+     <input name="username" id="username" hidden="hidden">
       <input type="submit" value="Submit" hidden = true id = "submit-btn">
    </form>
 
@@ -58,7 +58,7 @@
       </div>
         <a class="nav-link" href="/recent" onclick="colorswitch()">Recent</a>
         <a class="nav-link" href="/nearby">Nearby</a>
-        <a class="nav-link" id = "mine-link" >Mine</a>  
+        <a class="nav-link" id = "mine-link" >Mine</a>
         <a class="nav-link" href="/add">Add new Sighting</a>
         <span id="navtext" class="navbar-text navbar-right">
           <div id="username_display"></div>
@@ -123,17 +123,3 @@
 </body>
 </html>
 
-<script>
- const userName = document.getElementById("username_input").value;
- document.getElementById('username').value = "testing";
- 
- 
-  const mineLink = document.getElementById('mine-link')
-  const submitButton = document.getElementById('submit-btn')
-  mineLink.addEventListener('click', function() {
-    submitButton.click();
-    console.log(userName);
-  });
-  
-
-</script>

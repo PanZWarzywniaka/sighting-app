@@ -81,6 +81,25 @@ exports.list_recent = function(req, res, next) {
 
 
 
+
+
+exports.list_mine = function(req, res, next) {
+    let name = req.body.username;
+    console.log(name);
+    Sighting.find({username: name})
+    
+    .exec(function(err,sightings){
+        if (err) {
+            return next(err)
+        }
+        else 
+            res.render('index',{title: 'Bird Sightings', data: sightings})
+    })
+
+};
+
+
+
 // load the data for a specific sighting
 exports.getSightingById = function (req,res,next) {
     Sighting.findById(req.params.sightingId, function(err,obj){

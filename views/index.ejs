@@ -69,57 +69,58 @@
     </div>
   </nav>
   <p id="demo"></p>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <% let sort_nearby=data[0].hasOwnProperty("dist_calculated") ;%>
-        <% if (sort_nearby) {%>
-          <th scope="col">Distance</th>
-          <% } %>
-            <th scope="col">Date/Time</th>
-            <th scope="col">Identification</th>
-            <th scope="col">User</th>
-            <th scope="col">Image</th>
-            <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if (data.length==0) {%>
-        <p> There Are Currently No Sightings.</p>
-      <% } %>
-
-      <% for(let i=0; i<data.length; i++) {%>
+  <% if (data.length==0) {%>
+    <p> There Are Currently No Sightings.</p>
+  <% } else {%>
+    <table class="table table-hover">
+      <thead>
         <tr>
-          <% let datetime = new Date(data[i].last_seen) %>
-          <% let date = datetime.toLocaleDateString('default', { day:"2-digit",month: 'long' ,year:"numeric" }) %>
-          <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
-          <% if(sort_nearby) { %>
-            <td>
-              <%= (parseFloat(data[i].dist_calculated)/1000).toFixed(0) %> Km away
-            </td>
-          <% } %>
-
-          <td id="head">
-            <%=`${date} ${time}`%>
-          </td>
-          <td>
-            <%=data[i].identification%>
-          </td>
-          <td>
-            <%= data[i].username %>
-          </td>
-        <td>
-            <img src="<%= data[i].img %>" width="100" height="100">
-          </td>
-          <td>
-            <button type="button">
-              <a style="color:  white;" href="/sightings/<%=data[i]._id%>">View</a>
-            </button>
-          </td>
+          <% let sort_nearby=data[0].hasOwnProperty("dist_calculated") ;%>
+          <% if (sort_nearby) {%>
+            <th scope="col">Distance</th>
+            <% } %>
+              <th scope="col">Date/Time</th>
+              <th scope="col">Identification</th>
+              <th scope="col">User</th>
+              <th scope="col">Image</th>
+              <th scope="col"></th>
         </tr>
-        <% } %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+
+        <% for(let i=0; i<data.length; i++) {%>
+          <tr>
+            <% let datetime = new Date(data[i].last_seen) %>
+            <% let date = datetime.toLocaleDateString('default', { day:"2-digit",month: 'long' ,year:"numeric" }) %>
+            <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
+            <% if(sort_nearby) { %>
+              <td>
+                <%= (parseFloat(data[i].dist_calculated)/1000).toFixed(0) %> Km away
+              </td>
+            <% } %>
+
+            <td id="head">
+              <%=`${date} ${time}`%>
+            </td>
+            <td>
+              <%=data[i].identification%>
+            </td>
+            <td>
+              <%= data[i].username %>
+            </td>
+          <td>
+              <img src="<%= data[i].img %>" width="100" height="100">
+            </td>
+            <td>
+              <button type="button">
+                <a style="color:  white;" href="/sightings/<%=data[i]._id%>">View</a>
+              </button>
+            </td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+  <%}%>
 </body>
 </html>
 

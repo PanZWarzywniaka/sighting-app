@@ -41,4 +41,35 @@ function addMarker(position) {
     marker.setMap(map);
 }
 
+function onSubmit(event) {
+    event.preventDefault();
+    let form = document.querySelector('#xForm');
+    let last_seen = new Date(document.getElementById('last_seen').value);
+    // splits location field into longitude and latitude
+    let loc = document.getElementById('location').value.split(",");
+    let identification = document.getElementById('identification').value;
+    let description = document.getElementById('description').value;
+
+    console.log(loc)
+    console.log(loc.length)
+    console.log(last_seen, typeof last_seen);
+    let current_date = new Date();
+    if (loc.length !== 2) {
+        console.log('select a location in the map', loc, loc.length);
+        alert('Please select a location from the map')
+        return;
+    }
+    if (isNaN(last_seen)) {
+        console.log('please choose a valid date');
+        alert('Please choose a valid date')
+        return;
+    }
+    if(last_seen.getTime() > current_date.getTime()) {
+        alert('Please enter a valid date');
+        return;
+    }
+    form.submit()
+
+}
+
 window.initMap = initMap;

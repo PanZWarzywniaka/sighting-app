@@ -54,17 +54,19 @@ function onSubmit(event) {
     console.log(loc.length)
     console.log(last_seen, typeof last_seen);
     let current_date = new Date();
-    if (loc.length !== 2) {
+
+    if(identification === "" || description === "") {
+        alert('Please fill in the empty fields')
+        return;
+    }
+
+    if(loc.length !== 2) {
         console.log('select a location in the map', loc, loc.length);
         alert('Please select a location from the map')
         return;
     }
-    if (isNaN(last_seen)) {
-        console.log('please choose a valid date');
-        alert('Please choose a valid date')
-        return;
-    }
-    if(last_seen.getTime() > current_date.getTime()) {
+
+    if(last_seen.getTime() > current_date.getTime() || isNaN(last_seen)) {
         alert('Please enter a valid date');
         return;
     }

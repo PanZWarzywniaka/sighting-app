@@ -84,6 +84,9 @@ function colorswitch() {
     element.style.backgroundColor = "pink";
 }
 
+function toSighting(sightingId){
+    window.location.href = `/sightings/${sightingId}?username=${username}`;
+}
 function mine(){
     const userName = document.getElementById("username").value;
     console.log(`The username is: ${userName}`);

@@ -42,19 +42,19 @@
 <form class="form-inline form-horizontal" id="xForm" method="post" action="/add" enctype="multipart/form-data">
     <div class="mydiv">
         <div class="div-label"><label class="control-label " for="identification">Identification:</label></div>
-        <div class="div-input"><input class="input" type="text" name="identification" id="identification" placeholder="Input identification"></div>
+        <div class="div-input"><input class="input" type="text" name="identification" id="identification" placeholder="Input identification" required></div>
     </div>
     <div class="mydiv">
         <div class="div-label"><label class="control-label" for='description'>Description:</label></div>
-        <div class="div-input"><input class="input" type="text" name="description" id="description" placeholder="Enter description here"></div>
+        <div class="div-input"><input class="input" type="text" name="description" id="description" placeholder="Enter description here" required></div>
     </div>
     <div class="mydiv">
         <div class="div-label"><label class="control-label" for='last_seen'>Last seen:</label></div>
-        <div class="div-input"><input class="input" type="datetime-local" name="last_seen" id="last_seen"></div>
+        <div class="div-input"><input class="input" type="datetime-local" name="last_seen" id="last_seen" required></div>
     </div>
     <div id="image-div">
         <div><label id="image-label" class="control-label" for="myImage">Choose an image: </label></div>
-        <div id="image-input"><input type="file" id="myImage" name="myImg" accept="image/*" required></div>
+        <div id="image-input"><input type="file" id="myImage" name="myImg" accept="image/*"></div>
     </div>
     <input type="hidden" name="username" id="sightings_username">
     <input type="hidden" name="location" id="location">

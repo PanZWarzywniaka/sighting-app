@@ -11,7 +11,11 @@ const readUsernameSuccess = (ev) => {
     username = ev.target.result.text
     console.log("Saved username: ", username)
     document.getElementById('username_display').innerText = `Hello ${username}`
-    document.getElementById('sightings_username').value = username //for add page
+    let add_username = document.getElementById('sightings_username');
+    if (add_username !== null)
+        add_username.value = username //for add page
+    document.getElementById('username').value = username;
+    mine();
 
 }
 
@@ -31,6 +35,7 @@ const handleUpgrade = (ev) => {
 const handleError = (err) => {
     console.error("Error: " + JSON.stringify(err)+"\n")
 }
+
 
 const requestIDB = indexedDB.open("db")
 requestIDB.addEventListener("upgradeneeded", handleUpgrade)
@@ -81,4 +86,15 @@ function colorswitch() {
 
 function toSighting(sightingId){
     window.location.href = `/sightings/${sightingId}?username=${username}`;
+}
+function mine(){
+    const userName = document.getElementById("username").value;
+    console.log(`The username is: ${userName}`);
+
+    const mineLink = document.getElementById('mine-link')
+    const submitButton = document.getElementById('submit-btn')
+    mineLink.addEventListener('click', function() {
+        submitButton.click();
+        console.log(userName);
+    });
 }

@@ -93,6 +93,7 @@
             <% let datetime = new Date(data[i].last_seen) %>
             <% let date = datetime.toLocaleDateString('default', { day:"2-digit",month: 'long' ,year:"numeric" }) %>
             <% let time = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
+            <% let image_src = data[i].img !== null ? data[i].img : "/images/no_image.png";%>
             <% if(sort_nearby) { %>
               <td>
                 <%= (parseFloat(data[i].dist_calculated)/1000).toFixed(0) %> Km away
@@ -109,12 +110,11 @@
               <%= data[i].username %>
             </td>
           <td>
-              <img src="<%= data[i].img %>" width="100" height="100">
+            <%console.log(`Image src: ${image_src}`)%>
+              <img src="<%= image_src%>" width="100" height="100">
             </td>
             <td>
-              <button type="button">
-                <a style="color:  white;" href="/sightings/<%=data[i]._id%>">View</a>
-              </button>
+              <button type="button" id="toSighting" onclick="toSighting('<%=data[i]._id%>')">View</button>
             </td>
           </tr>
           <% } %>

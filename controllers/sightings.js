@@ -9,7 +9,9 @@ exports.create = function (req, res) {
     let userData = req.body;
     // splits location field into longitude and latitude
     let loc = req.body.location.split(",");
-    //let path = req.file.path.replace("public","")
+    let path = null;
+    if (req.file !== undefined)
+        path = req.file.path.replace("public","");
     
     let sighting = new Sighting({
         identification: userData.identification,
@@ -20,7 +22,7 @@ exports.create = function (req, res) {
             type: "Point",
             coordinates: [parseFloat(loc[0]), parseFloat(loc[1])]
         },
-        //img: path
+        img: path
     });
 
     sighting.save(function (err, results) {
@@ -106,7 +108,7 @@ exports.getSightingById = function (req,res,next) {
         if (err)
             console.log(err)
         else
-            Chat.list_all(req,res,obj,req.params.sightingId);
+            Chat.list_all(req,res,obj,req.params.sightingId,req.query.username);
     });
 };
 

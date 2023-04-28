@@ -18,13 +18,13 @@ exports.create = function (chatData) {
     });
 };
 
-exports.list_all = function(req,res,sightingObj,sightingId) {
+exports.list_all = function(req,res,sightingObj,sightingId,username) {
     let ret = [];
     Chat.find({sightingId:sightingId},(err,chats) => {
         if (err)
             console.log(err)
         else
-            res.render('sighting',{title:'View A sighting',data:sightingObj, chats:chats});
+            res.render('sighting',{title:'View A sighting',data:sightingObj, chats:chats, username:username});
     })
     return ret;
 };

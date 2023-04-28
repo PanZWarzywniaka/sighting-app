@@ -12,8 +12,7 @@ let SightingSchema = new Schema(
             type: { type: String },
             coordinates: []
         },
-        
-        //img: {type: String, required: true}
+        img: {type: String}
     }
 );
 

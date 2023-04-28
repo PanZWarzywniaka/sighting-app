@@ -17,6 +17,7 @@
     <% let datetime = new Date() %>
     <% let date_today = datetime.toLocaleDateString() %>
     <% let time_now = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
+    <% let image_src = data.img !== null ? data.img : "/images/no_image.png";%>
 
     <nav class="navbar navbar-default" id = "ournav">
         <div class="container-fluid">
@@ -35,7 +36,7 @@
         <div class="row">
             <div class="col">
                 <h3>Image Captured</h3>
-                <div class="grid-item" id = "bird_img"><img src="<%= data.img %>"></div>
+                <div class="grid-item" id = "bird_img"><img src="<%= image_src %>"></div>
             </div>
 
             <div class="col">

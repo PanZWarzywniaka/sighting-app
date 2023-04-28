@@ -9,7 +9,9 @@ exports.create = function (req, res) {
     let userData = req.body;
     // splits location field into longitude and latitude
     let loc = req.body.location.split(",");
-    let path = req.file.path.replace("public","")
+    let path = null;
+    if (req.file !== undefined)
+        path = req.file.path.replace("public","");
     
     let sighting = new Sighting({
         identification: userData.identification,

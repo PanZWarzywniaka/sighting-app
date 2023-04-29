@@ -14,6 +14,32 @@
 </head>
 <!--Will get users username from cookie-->
 <body onload="init(<%= JSON.stringify(data) %>,'<%=username%>')">
+
+    <!-- create modal  if abstract exists -->
+ 
+        <!-- Modal -->
+        <div class="modal fade" id="infoModal" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="infoModalLabel"><%= data.identification %></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <p><%= data.abstract %></p>
+                <img src="<%= data.imgLink %>"><br>
+                <% if (data.wikiLink != '') {%>
+                    <a href="<%= data.wikiLink %>">See wiki page</a>
+                <%}%>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+            </div>
+        </div>
+
     <% let datetime = new Date() %>
     <% let date_today = datetime.toLocaleDateString() %>
     <% let time_now = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
@@ -51,6 +77,13 @@
     <br>
     <h3>Description</h3>
     <p><%= data.description %></p>
+    <br>
+    <!-- create modal if abstract exists -->
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#infoModal">
+            See more info
+        </button>
+
 
 </div>
 

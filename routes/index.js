@@ -1,6 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let bodyParser = require("body-parser");
+const fs = require('fs'); //file system
 
 //sighting controller 
 let sighting = require('../controllers/sightings');
@@ -59,7 +60,15 @@ router.get('/sightings/:sightingId',function(req,res,next){
 });
 
 router.get('/add', function(req, res, next) {
-  res.render('add', { title: 'Add a new Sighting to the DB' });
+
+  const bird_data = fs.readFileSync('public/birds.csv', 'utf-8')
+  const bird_list = bird_data.split('\n').sort()
+  console.log(bird_list)
+
+  res.render('add', { 
+    title: 'Add a new Sighting to the DB',
+    species: bird_list,
+ });
 });
 
 router.post('/add', upload.single('myImg'), function(req, res) {

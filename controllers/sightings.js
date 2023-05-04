@@ -103,7 +103,7 @@ exports.list_mine = function (req, res, next) {
 
 
 function queryBirdInfoFromDBPedia(req, res, obj) {
-    let identification = obj['identification']
+    let identification = obj['identification'].trim()
     const sparqlQuery = `SELECT  ?wiki_link ?image_link  (REPLACE(?abstract, "@en", "") AS ?abstract) 
     WHERE {
       ?dbpedia_link rdf:type dbo:Bird ;

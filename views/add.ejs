@@ -41,8 +41,19 @@
 
 <form class="form-inline form-horizontal" id="xForm" method="post" action="/add" enctype="multipart/form-data">
     <div class="mydiv">
-        <div class="div-label"><label class="control-label " for="identification">Identification:</label></div>
-        <div class="div-input"><input class="input" type="text" name="identification" id="identification" placeholder="Input identification" required></div>
+        <div class="div-label"><label class="control-label" for="identification">Identification:</label></div>
+    
+        <div class="div-input">
+
+          <select class="form-select" name="identification" id="identification" required>
+            <option selected>Unknown</option>
+            <% for (let i = 0; i < species.length; i++) {%>
+              <option value="<%= species[i]%>">
+                <%= species[i]%>
+              </option>
+            <% } %>
+          </select>
+        </div>
     </div>
     <div class="mydiv">
         <div class="div-label"><label class="control-label" for='description'>Description:</label></div>

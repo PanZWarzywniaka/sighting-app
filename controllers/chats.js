@@ -18,7 +18,10 @@ exports.create = function (chatData) {
     });
 };
 
-exports.list_all = function(req,res,sightingObj,sightingId,username) {
+exports.list_all = function(req,res,sightingObj) {
+    console.log(sightingObj)
+    let sightingId = req.params.sightingId
+    let username = req.query.username
     let ret = [];
     Chat.find({sightingId:sightingId},(err,chats) => {
         if (err)

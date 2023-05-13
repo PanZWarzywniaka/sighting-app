@@ -1,76 +1,129 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title><%= title %></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
-    <script src="/javascripts/add.js"></script>
-    <script src="/javascripts/index.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe2fdRMMdIhlmYYFXEup7lXGOV8lzm6qk&callback=initMap&v=weekly" defer></script>
+  <title>
+    <%= title %>
+  </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  <script src="/javascripts/index.js"></script>
+  <script src="/javascripts/add.js"></script>
+  
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe2fdRMMdIhlmYYFXEup7lXGOV8lzm6qk&callback=initMap&v=weekly"
+    defer></script>
+
 
 </head>
+
 <body>
+
+    <!-- Modal -->
+    <div class="modal fade" id="username-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Welcome</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <form>
+                      <div class="form-group">
+                          <label for="username_input">Username:</label>
+                          <input type="text" class="form-control" id="username_input">
+
+                      </div>
+
+                      <div class="form-group">
+                          <!-- <div id="map-container"><div id="map"></div></div> -->
+                          <input type="hidden" name="user_location" id="user_location">
+                      </div>
+                  </form>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveUserData">Save</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <form id = "name-form" action = "/mine" method = "post">
+      <input name="username" id="username" hidden="hidden">
+      <input type="submit" value="Submit" hidden = true id = "submit-btn">
+  </form>
+
+
+
   <!-- NAV BAR -->
   <nav class="navbar navbar-default" id="ournav">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" id="logo" href="#">
-          <%= title %>
-        </a>
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand" id="logo" href="#">
+                  <%= title %>
+              </a>
+          </div>
+          <a class="nav-link" href="/recent" onclick="colorswitch()">Recent</a>
+          <a class="nav-link" id="nearby-link">Nearby</a>
+          <a class="nav-link" id="mine-link">Mine</a>
+          <a class="nav-link" href="/add">Add new Sighting</a>
+          <span id="navtext" class="navbar-text navbar-right">
+                <div id="username_display"></div>
+                <button type="button" hidden="True" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#username-modal">
+                  Change username
+                </button>
+              </span>
       </div>
-        <a class="nav-link" href="/recent" onclick="colorswitch()">Recent</a>
-        <a class="nav-link" href="/nearby">Nearby</a>
-        <a class="nav-link" href="/add">Add new Sighting</a>
-        <span id="navtext" class="navbar-text navbar-right">
-          <div id="username_display"></div>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#username-modal">
-            Change username
-          </button>
-        </span>
-    </div>
   </nav>
 
-<p id="map-instructions">Click on the map to add a marker.</p>
-<div id="map-container"><div id="map"></div></div>
+
+  <p id="map-instructions">Click on the map to add a marker.</p>
+  <div id="map-container"><div id="map"></div></div>
 
 
-<form class="form-inline form-horizontal" id="xForm" method="post" action="/add" enctype="multipart/form-data">
+  <form class="form-inline form-horizontal" id="xForm" method="post" action="/add" enctype="multipart/form-data">
     <div class="mydiv">
-        <div class="div-label"><label class="control-label" for="identification">Identification:</label></div>
-    
-        <div class="div-input">
+      <div class="div-label"><label class="control-label" for="identification">Identification:</label></div>
 
-          <select class="form-select" name="identification" id="identification" required>
-            <option selected>Unknown</option>
-            <% for (let i = 0; i < species.length; i++) {%>
-              <option value="<%= species[i]%>">
-                <%= species[i]%>
-              </option>
+      <div class="div-input">
+
+        <select class="form-select" name="identification" id="identification" required>
+          <option selected>Unknown</option>
+          <% for (let i=0; i < species.length; i++) {%>
+            <option value="<%= species[i]%>">
+              <%= species[i]%>
+            </option>
             <% } %>
-          </select>
-        </div>
+        </select>
+      </div>
     </div>
     <div class="mydiv">
-        <div class="div-label"><label class="control-label" for='description'>Description:</label></div>
-        <div class="div-input"><input class="input" type="text" name="description" id="description" placeholder="Enter description here" required></div>
+      <div class="div-label"><label class="control-label" for='description'>Description:</label></div>
+      <div class="div-input"><input class="input" type="text" name="description" id="description"
+          placeholder="Enter description here" required></div>
     </div>
     <div class="mydiv">
-        <div class="div-label"><label class="control-label" for='last_seen'>Last seen:</label></div>
-        <div class="div-input"><input class="input" type="datetime-local" name="last_seen" id="last_seen" required></div>
+      <div class="div-label"><label class="control-label" for='last_seen'>Last seen:</label></div>
+      <div class="div-input"><input class="input" type="datetime-local" name="last_seen" id="last_seen" required></div>
     </div>
     <div id="image-div">
-        <div><label id="image-label" class="control-label" for="myImage">Choose an image: </label></div>
-        <div id="image-input"><input type="file" id="myImage" name="myImg" accept="image/*"></div>
+      <div><label id="image-label" class="control-label" for="myImage">Choose an image: </label></div>
+      <div id="image-input"><input type="file" id="myImage" name="myImg" accept="image/*"></div>
     </div>
     <input type="hidden" name="username" id="sightings_username">
     <input type="hidden" name="location" id="location">
 
     <p><input type="submit" name="g" value="Submit" id="g" onclick="onSubmit(event)"></p>
-</form>
+  </form>
 </body>
+
 </html>

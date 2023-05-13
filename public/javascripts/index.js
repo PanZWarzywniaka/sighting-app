@@ -118,13 +118,13 @@ function initUserMap() {
     }
     // Place marker where user clicks on map and store longitude and latitude in hidden input fields in the form
     userMap.addListener("click", (event) => {
-        addMarker(event.latLng);
+        addUserMarker(event.latLng);
         document.getElementById('user_location').value = `${event.latLng.lng()},${event.latLng.lat()}`;
     });
 }
 
 // Adds a marker to the map
-function addMarker(position) {
+function addUserMarker(position) {
     // get rid of previous marker since user can only input 1 marker
     if (userMarker)
         userMarker.setMap(null);

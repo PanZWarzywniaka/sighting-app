@@ -103,7 +103,9 @@
                     <% let image_src = data[i].img !== null ? data[i].img : "/images/no_image.png";%>
                     <% if(sort_nearby) { %>
                         <td>
-                            <%= (parseFloat(data[i].dist_calculated)/1000).toFixed(0) %> Km away
+                            <% let loc =`${data[i].location.coordinates[0]},${data[i].location.coordinates[1]}` %>
+                            <%=loc%><br>
+                            <%= (parseFloat(data[i].dist_calculated)/1000).toFixed(1) %> Km away
                         </td>
                     <% } %>
                     <td id="head">

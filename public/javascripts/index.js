@@ -1,20 +1,25 @@
 let username = null
 
-
 $(window).on('load', function() {
 
     console.log("Page has been loaded!")
-    readUsername()
+    readUserData()
 });
 
-const readUsernameSuccess = (ev) => {
+const readUserDataSuccess = (ev) => {
     username = ev.target.result.text
+    let location = ev.target.result.location
     console.log("Saved username: ", username)
+    console.log("Saved location: ", location)
     document.getElementById('username_display').innerText = `Hello ${username}`
     let add_username = document.getElementById('sightings_username');
     if (add_username !== null)
         add_username.value = username //for add page
     document.getElementById('username').value = username;
+
+    let nearByLink = document.getElementById('nearby-link')
+    nearByLink.href = `/nearby?location=${location}`
+
     mine();
 
 }
@@ -56,16 +61,16 @@ let saveUserData = () => {
 
     
     console.log("Username saved")
-    readUsername()
+    readUserData()
 }
 
-let readUsername = () => {
+let readUserData = () => {
     const myIDB = requestIDB.result
     const transaction = myIDB.transaction(['usernames'], "readwrite")
     const myStore = transaction.objectStore('usernames')
 
     let savedUsername = myStore.get(1) 
-    savedUsername.addEventListener("success", readUsernameSuccess)
+    savedUsername.addEventListener("success", readUserDataSuccess)
 
     savedUsername.addEventListener("error", (ev) => {
         console.error("There is no username in the database")

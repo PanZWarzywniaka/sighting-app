@@ -54,12 +54,14 @@
     </div>
     <div id="image-div">
         <div><label id="image-label" class="control-label" for="myImage">Choose an image: </label></div>
-        <div id="image-input"><input type="file" id="myImage" name="myImg" accept="image/*" required></div>
+        <div id="image-input"><input type="file" id="myImage" name="myImg" onchange="encode()" accept="image/*" required></div>
     </div>
     <input type="hidden" name="username" id="sightings_username">
     <input type="hidden" name="location" id="location">
 
     <p><input type="submit" name="g" value="Submit" id="g"></p>
 </form>
+<div id="imgTest"></div>
+
 </body>
 </html>

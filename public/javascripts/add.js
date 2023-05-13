@@ -42,3 +42,20 @@ function addMarker(position) {
 }
 
 window.initMap = initMap;
+
+function encode() {
+    var selectedfile = document.getElementById("myImage").files;
+    if (selectedfile.length > 0) {
+      var imageFile = selectedfile[0];
+      var fileReader = new FileReader();
+      fileReader.onload = function(fileLoadedEvent) {
+        var srcData = fileLoadedEvent.target.result;
+        var newImage = document.createElement('img');
+        newImage.src = srcData;
+        document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+        alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+        console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
+      }
+      fileReader.readAsDataURL(imageFile);
+    }
+  }

@@ -12,8 +12,12 @@ const readUsernameSuccess = (ev) => {
     console.log("Saved username: ", username)
     document.getElementById('username_display').innerText = `Hello ${username}`
     document.getElementById('sightings_username').value = username //for add page
+    document.getElementById('username').value = username;
 
 }
+
+
+
 
 
 const handleSuccess = () => {
@@ -68,15 +72,4 @@ let readUsername = () => {
     })
 }
 
-document.querySelector('#nearby').addEventListener('click', () => {
-    document.querySelector('#recent').classList.remove('active');
-    document.querySelector('#nearby').classList.add('active');
-
-  })
-
-function colorswitch() {
-    document.getElementById("demo").innerHTML = "Hello World";
-    document.getElementById("recent").innerHTML = element;
-    element.style.backgroundColor = "pink";
-}
 

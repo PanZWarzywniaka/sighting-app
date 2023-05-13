@@ -72,11 +72,6 @@ let readUsername = () => {
     })
 }
 
-document.querySelector('#nearby').addEventListener('click', () => {
-    document.querySelector('#recent').classList.remove('active');
-    document.querySelector('#nearby').classList.add('active');
-
-  })
 
 function colorswitch() {
     document.getElementById("demo").innerHTML = "Hello World";

@@ -59,6 +59,12 @@ router.get('/sightings/:sightingId',function(req,res,next){
   sighting.getSightingById(req,res,next);
 });
 
+//by updating identification
+router.post('/sightings/:sightingId',function(req,res){
+  sighting.updateSightingById(req,res);
+});
+
+
 router.get('/add', function(req, res, next) {
 
   const bird_data = fs.readFileSync('public/birds.csv', 'utf-8')

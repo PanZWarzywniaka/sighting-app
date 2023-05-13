@@ -132,7 +132,7 @@ function queryBirdInfoFromDBPedia(req, res, obj) {
 
             data += d
             data = data.split('\n')[1] //ignore first line
-            if (data=='') {
+            if (data == '') {
                 console.error('Unfortunetly there is no data for this bird');
                 Chat.list_all(req, res, obj);
             } else {
@@ -140,16 +140,16 @@ function queryBirdInfoFromDBPedia(req, res, obj) {
 
                 console.log(`Data: ${data}`)
                 console.log(`data length: ${data.length}`)
-    
-                
+
+
                 //copy object
                 let new_obj = JSON.parse(JSON.stringify(obj))
-    
+
                 //add retrieved data to sighting object
-                new_obj.wikiLink = data[0].substring(1); 
+                new_obj.wikiLink = data[0].substring(1);
                 new_obj.imgLink = data[1]
                 new_obj.abstract = data[2].substring(0, data[2].length - 1) // remove last character
-    
+
                 // console.log(`Sighting object ${new_obj}`)
                 Chat.list_all(req, res, new_obj);
             }
@@ -176,7 +176,57 @@ exports.getSightingById = function (req, res, next) {
 };
 
 
+// load the data for a specific sighting
+exports.updateSightingById = function (req, res) {
 
+    let userData = req.body;
+    console.log("Updating sighitngs got such data:", userData)
+    let sightingId = userData._id
+
+    let newIdentification = userData.new_identification
+
+    Sighting.findByIdAndUpdate(sightingId, { 'identification': newIdentification },
+        function (err, docs) {
+            if (err) {
+                console.log(err)
+            }
+            else {
+                console.log("Updated Sighting : ", docs);
+            }
+        });
+
+    res.redirect(req.originalUrl); //redirect back after updating
+};
+
+
+exports.create = function (req, res) {
+    let userData = req.body;
+    // splits location field into longitude and latitude
+    let loc = req.body.location.split(",");
+    let path = null;
+    if (req.file !== undefined)
+        path = req.file.path.replace("public", "");
+
+    let sighting = new Sighting({
+        identification: userData.identification,
+        description: userData.description,
+        username: userData.username,
+        last_seen: userData.last_seen,
+        location: {
+            type: "Point",
+            coordinates: [parseFloat(loc[0]), parseFloat(loc[1])]
+        },
+        img: path
+    });
+
+    sighting.save(function (err, results) {
+        if (err) {
+            console.log(err)
+            res.status(500).send(err);
+        }
+        res.redirect('/sightings');
+    });
+};
 
 
 

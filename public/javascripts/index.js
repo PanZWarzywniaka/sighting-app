@@ -15,10 +15,21 @@ const readUsernameSuccess = (ev) => {
     if (add_username !== null)
         add_username.value = username //for add page
     document.getElementById('username').value = username;
+
+    hideUpdate();
     mine();
 
 }
-
+function hideUpdate() {
+    try {
+        if (username !== document.getElementById('sightings_creator').value ) {
+            //hide button for updating sighting if user didnt create it
+            document.getElementById('update-id-button').hidden = "True" 
+        }
+    } catch (error) {
+        //ignore errors on diffrent sights
+    }
+}
 
 const handleSuccess = () => {
     console.log("Success")

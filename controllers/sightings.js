@@ -58,8 +58,8 @@ exports.list_nearby = function (req, res, next) {
         console.log("Error retrieving location using default one for Sheffield");
     } else {
         const userLocationArray = userLocationString.split(","); //split longituede and latidue
-        userLocation = userLocationArray.map(str => parseInt(str)); //parse to int
-        console.log('Got location: ', userLocationString)
+        userLocation = userLocationArray.map(str => parseFloat(str)); //parse to int
+        console.log('Got location: ', userLocation)
     }
 
     Sighting.aggregate

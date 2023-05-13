@@ -73,13 +73,6 @@ let readUsername = () => {
     })
 }
 
-
-function colorswitch() {
-    document.getElementById("demo").innerHTML = "Hello World";
-    document.getElementById("recent").innerHTML = element;
-    element.style.backgroundColor = "pink";
-}
-
 function toSighting(sightingId){
     window.location.href = `/sightings/${sightingId}?username=${username}`;
 }
@@ -100,7 +93,8 @@ let userMap;
 let userMarker;
 
 function initUserMap() {
-    userMap = new google.maps.Map(document.getElementById('map-user'),{
+    console.log("Initializing user map")
+    userMap = new google.maps.Map(document.getElementById('map'),{
         disableDefaultUI: true,
         mapTypeId: 'hybrid',
         zoomControl: true,
@@ -132,7 +126,7 @@ function addMarker(position) {
     //create new marker
     userMarker = new google.maps.Marker({
         position,
-        icon: "/images/bird.png",
+        icon: "/images/user.png",
         userMap,
     });
     //add marker to the map

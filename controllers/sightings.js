@@ -49,7 +49,20 @@ exports.list_all = function (req, res) {
 
 exports.list_nearby = function (req, res, next) {
     // get position of current user to find the nearest sightings
-    let userLocation = [-1.4701, 53.3811];
+    
+    let userLocation;
+    
+    const userLocationString = req.query.location; //get text value from parameter
+    console.log(`userLocationString = ${userLocationString}`)
+    if (typeof userLocationString === 'undefined' || userLocationString === '') {
+        userLocation = [-1.4701, 53.3811]; //default location
+        console.log("Error retrieving location using default one for Sheffield");
+    } else {
+        const userLocationArray = userLocationString.split(","); //split longituede and latidue
+        userLocation = userLocationArray.map(str => parseFloat(str)); //parse to int
+        console.log('Got location: ', userLocation)
+    }
+
     Sighting.aggregate
         ([
             {
@@ -87,8 +100,8 @@ exports.list_recent = function (req, res, next) {
 
 
 exports.list_mine = function (req, res, next) {
-    let name = req.body.username;
-    console.log(name);
+    let name = req.query.username;
+    console.log(`Listing mine for: ${name}`);
     Sighting.find({ username: name })
 
         .exec(function (err, sightings) {

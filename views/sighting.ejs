@@ -99,12 +99,18 @@
                         <div class="form-group">
                             <label for="username_input">Username:</label>
                             <input type="text" class="form-control" id="username_input">
+  
+                        </div>
+  
+                        <div class="form-group">
+                            <!-- <div id="map-container"><div id="map"></div></div> -->
+                            <input type="hidden" name="user_location" id="user_location">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveUsername">Save</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveUserData">Save</button>
                 </div>
             </div>
         </div>
@@ -112,13 +118,6 @@
 
 
     <input id="sightings_creator" value="<%=data.username%>" hidden="True">
-    <form id = "name-form" action = "/mine" method = "post">
-        <input name="username" id="username" hidden="hidden">
-        
-        <input type="submit" value="Submit" hidden = true id = "submit-btn">
-    </form>
-
-
 
     <!-- NAV BAR -->
     <nav class="navbar navbar-default" id="ournav">
@@ -129,13 +128,13 @@
                 </a>
             </div>
             <a class="nav-link" href="/recent" onclick="colorswitch()">Recent</a>
-            <a class="nav-link" href="/nearby">Nearby</a>
-            <a class="nav-link" id = "mine-link" >Mine</a>
+            <a class="nav-link" id="nearby-link">Nearby</a>
+            <a class="nav-link" id="mine-link">Mine</a>
             <a class="nav-link" href="/add">Add new Sighting</a>
             <span id="navtext" class="navbar-text navbar-right">
                   <div id="username_display"></div>
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#username-modal">
-                    Change username
+                    Change profile
                   </button>
                 </span>
         </div>

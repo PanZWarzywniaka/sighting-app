@@ -45,15 +45,9 @@ router.get('/recent', function(req, res, next) {
   sighting.list_recent(req,res,next);
 });
 
-router.post('/mine', function(req, res, next) {
-  sighting.list_mine(req,res,next);
-});
-
 router.get('/mine', function(req, res, next) {
   sighting.list_mine(req,res,next);
-
 });
-
 
 router.get('/sightings/:sightingId',function(req,res,next){
   sighting.getSightingById(req,res,next);

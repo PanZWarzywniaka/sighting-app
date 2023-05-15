@@ -2,6 +2,7 @@ let map;
 let marker;
 
 function initMap() {
+    console.log("Initializing bird map")
     map = new google.maps.Map(document.getElementById('map'),{
         disableDefaultUI: true,
         mapTypeId: 'hybrid',

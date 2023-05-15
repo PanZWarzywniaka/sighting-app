@@ -66,6 +66,12 @@ a {
   alignment: center;
 
 }
+#nav_map {
+  height: 100%;
+  width: 100%;
+  alignment: center;
+
+}
 
 #map-container{
   border-style: solid;

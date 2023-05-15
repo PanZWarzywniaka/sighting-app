@@ -66,7 +66,7 @@ router.get('/add', function(req, res, next) {
   console.log(bird_list)
 
   res.render('add', { 
-    title: 'Add a new Sighting to the DB',
+    title: 'Add a Sighting',
     species: bird_list,
  });
 });

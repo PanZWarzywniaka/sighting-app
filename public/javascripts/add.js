@@ -88,7 +88,7 @@ function encode() {
     //     document.getElementById("imgTest").innerHTML = newImage.outerHTML;
     //     alert("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
     //     console.log("Converted Base64 version is " + document.getElementById("imgTest").innerHTML);
-    //   }
+      }
       fileReader.readAsDataURL(imageFile);
     }
 }

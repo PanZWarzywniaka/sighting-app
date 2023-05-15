@@ -31,20 +31,8 @@ exports.create = function (req, res) {
             console.log(err)
             res.status(500).send(err);
         }
-        res.redirect('/sightings');
+        res.redirect('/');
     });
-};
-
-exports.list_all = function (req, res) {
-    let ret = []
-    Sighting.find({}, (err, sightings) => {
-        if (err)
-            console.log(err)
-        else
-            res.render('index', { title: 'Bird Sightings', data: sightings });
-    })
-
-    return ret
 };
 
 exports.list_nearby = function (req, res, next) {
@@ -195,6 +183,7 @@ exports.updateSightingById = function (req, res) {
     let userData = req.body;
     console.log("Updating sighitngs got such data:", userData)
     let sightingId = userData._id
+    console.log(`USERNAME IS: ${userData.username}`)
 
     let newIdentification = userData.new_identification
 
@@ -208,38 +197,5 @@ exports.updateSightingById = function (req, res) {
             }
         });
 
-    res.redirect(req.originalUrl); //redirect back after updating
+    res.redirect(`${req.originalUrl}?username=${userData.username}`); //redirect back after updating
 };
-
-
-exports.create = function (req, res) {
-    let userData = req.body;
-    // splits location field into longitude and latitude
-    let loc = req.body.location.split(",");
-    let path = null;
-    if (req.file !== undefined)
-        path = req.file.path.replace("public", "");
-
-    let sighting = new Sighting({
-        identification: userData.identification,
-        description: userData.description,
-        username: userData.username,
-        last_seen: userData.last_seen,
-        location: {
-            type: "Point",
-            coordinates: [parseFloat(loc[0]), parseFloat(loc[1])]
-        },
-        img: path
-    });
-
-    sighting.save(function (err, results) {
-        if (err) {
-            console.log(err)
-            res.status(500).send(err);
-        }
-        res.redirect('/sightings');
-    });
-};
-
-
-

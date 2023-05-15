@@ -60,7 +60,8 @@ let saveUserData = () => {
         idb.saveValue('usernames',requestIDB,username)
     if(location)
         idb.saveValue('locations',requestIDB,location)
-    readUserData()
+    location.reload();
+    // readUserData()
 }
 let readUserData = () => {
     idb.readValue('usernames',requestIDB, readUsernameSuccess,(ev) => {

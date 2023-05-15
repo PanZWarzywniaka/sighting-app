@@ -49,6 +49,7 @@
                     <div class="modal-body">
 
                     <input hidden="true" name="_id" value="<%=data._id%>">
+                    <input hidden="true" name="username" value="<%=data.username%>">
 
                     <select class="form-select" name="new_identification" id="new_identification" required>
                         <option selected><%= data.identification %></option>
@@ -76,7 +77,8 @@
     <% let date_today = datetime.toLocaleDateString() %>
     <% let time_now = datetime.toLocaleTimeString('default', {hour:"numeric",minute:"numeric"}) %>
     <% let image_src = data.img !== null ? data.img : "/images/no_image.png";%>
-    <% let isAuthor = username == data.username%>
+    <% let isAuthor = username === data.username%>
+
 
     <div class="container">
         <h1 class="text-center"> <%= data.identification %> </h1>

@@ -183,6 +183,7 @@ exports.updateSightingById = function (req, res) {
     let userData = req.body;
     console.log("Updating sighitngs got such data:", userData)
     let sightingId = userData._id
+    console.log(`USERNAME IS: ${userData.username}`)
 
     let newIdentification = userData.new_identification
 
@@ -196,5 +197,5 @@ exports.updateSightingById = function (req, res) {
             }
         });
 
-    res.redirect(req.originalUrl); //redirect back after updating
+    res.redirect(`${req.originalUrl}?username=${userData.username}`); //redirect back after updating
 };

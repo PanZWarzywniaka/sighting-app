@@ -5,6 +5,7 @@
     <%- include('partials/head.ejs') %>
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="/javascripts/chat.js"></script>
+    <script type="module" src="/javascripts/sighting.js"></script>
 </head>
 <!--Will get users username from cookie-->
 <body onload="init(<%= JSON.stringify(data) %>,'<%=username%>')">
@@ -179,5 +180,4 @@
     }
 </script>
 <%- include('partials/footer.ejs') %>
-<script src="/javascripts/sighting.js"></script>
 </html>

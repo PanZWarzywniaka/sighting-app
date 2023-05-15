@@ -4,8 +4,15 @@ let map;
 let marker;
 
 function initMap() {
-    map = gMap.createMap("map")
-    gMap.addClickListener(map,'location',marker,false,"/images/bird.png")
+    let map_data = document.getElementById("location");
+    let coords = map_data.dataset.loc.split(',');
+    map = gMap.createMap("map",false,coords)
+    marker = new google.maps.Marker({
+        position: new google.maps.LatLng(parseFloat(coords[1]),parseFloat(coords[0])),
+        icon: "/images/bird.png",
+        map: map
+    });
+    marker.setMap(map);
 }
 
 window.initMap = initMap;

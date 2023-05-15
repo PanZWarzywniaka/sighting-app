@@ -1,4 +1,4 @@
-function createMap(mapId) {
+function createMap(mapId, useUserLoc, loc) {
     let map = new google.maps.Map(document.getElementById(mapId),{
         disableDefaultUI: true,
         mapTypeId: 'hybrid',
@@ -6,16 +6,21 @@ function createMap(mapId) {
         zoom: 15,
     });
     // Get current users' location, center map to sheffield if error or user doesn't allow access to location
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            let initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            map.setCenter(initialLocation);
-        }, function(err){
+    if(useUserLoc){
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                let initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                map.setCenter(initialLocation);
+            }, function(err){
+                map.setCenter(new google.maps.LatLng(53.3811,-1.4701));
+            })
+        } else {
             map.setCenter(new google.maps.LatLng(53.3811,-1.4701));
-        })
+        }
     } else {
-        map.setCenter(new google.maps.LatLng(53.3811,-1.4701));
+        map.setCenter(new google.maps.LatLng(parseFloat(loc[1]),parseFloat(loc[0])));
     }
+
     return map
 }
 

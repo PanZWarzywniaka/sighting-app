@@ -74,7 +74,7 @@ let readUserData = () => {
 
 function initMapNav() {
     navMap = gMap.createMap("nav_map",true,[53.3811,-1.4701])
-    gMap.addClickListener(navMap,'user_location',navMarker,true,"/images/user.png")
+    navMap = gMap.addClickListener(navMap,'user_location',navMarker,true,"/images/user.png")
 }
 window.initMapNav = initMapNav;
 

@@ -27,9 +27,10 @@ function createMap(mapId, useUserLoc, loc) {
 function addClickListener(map,locationStoreElement,marker,canAddMarker,iconPath){
     // Place marker where user clicks on map and store longitude and latitude in hidden input fields in the form
     map.addListener("click", (event) => {
-        addMarker(event.latLng,map,marker,canAddMarker,iconPath);
+        marker = addMarker(event.latLng,map,marker,canAddMarker,iconPath);
         document.getElementById(locationStoreElement).value = `${event.latLng.lng()},${event.latLng.lat()}`;
     });
+    return marker
 }
 
 
@@ -49,6 +50,7 @@ function addMarker(position,map,marker,canAddMarker,iconPath) {
         //"/images/bird.png"
         marker.setMap(map);
     }
+    return marker
 }
 
 

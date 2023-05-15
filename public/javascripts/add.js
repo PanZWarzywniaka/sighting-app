@@ -6,7 +6,7 @@ let marker;
 
 function initMap() {
     map = gMap.createMap("map",true,[53.3811,-1.4701])
-    gMap.addClickListener(map,'location',marker,true,"/images/bird.png")
+    marker = gMap.addClickListener(map,'location',marker,true,"/images/bird.png")
 }
 
 

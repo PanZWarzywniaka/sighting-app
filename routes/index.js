@@ -29,35 +29,28 @@ var upload = multer({ storage: storage });
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  sighting.list_all(req,res);
+    sighting.list_recent(req,res,next);
 });
 
-
-router.get('/sightings', function(req, res, next) {
-  sighting.list_all(req,res);
-});
 
 router.get('/nearby', function(req, res, next) {
     sighting.list_nearby(req,res,next);
 });
 
-router.get('/recent', function(req, res, next) {
-  sighting.list_recent(req,res,next);
-});
-
-router.post('/mine', function(req, res, next) {
-  sighting.list_mine(req,res,next);
-});
 
 router.get('/mine', function(req, res, next) {
   sighting.list_mine(req,res,next);
-
 });
-
 
 router.get('/sightings/:sightingId',function(req,res,next){
   sighting.getSightingById(req,res,next);
 });
+
+//by updating identification
+router.post('/sightings/:sightingId',function(req,res){
+  sighting.updateSightingById(req,res);
+});
+
 
 router.get('/add', function(req, res, next) {
 
@@ -66,7 +59,7 @@ router.get('/add', function(req, res, next) {
   console.log(bird_list)
 
   res.render('add', { 
-    title: 'Add a new Sighting to the DB',
+    title: 'Add a Sighting',
     species: bird_list,
  });
 });

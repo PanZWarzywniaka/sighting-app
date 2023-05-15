@@ -1,0 +1,69 @@
+<header>
+    <!-- Modal -->
+    <div class="modal fade" id="username-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Welcome</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="username_input">Username:</label>
+                            <input type="text" class="form-control" id="username_input">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username_input">Location:</label>
+                            <div id="map-container"><div id="nav_map"></div></div>
+                            <input type="hidden" name="user_location" id="user_location">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveUserData">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input id="username" name="username" hidden="hidden">
+
+
+    <!-- NAV BAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="ournav">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" id="logo">
+                    <%= title %>
+                    <img src="/images/bird.png" alt="bird logo">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Recent</a>
+                    </li>
+                    <li class="nav-item">
+                       <span id="nearby_span" data-toggle="tooltip" title=""> <a class="nav-link" id="nearby-link" href="#">Nearby</a></span>
+                    </li>
+                    <li class="nav-item">
+                        <span id="mine_span" data-toggle="tooltip" title=""> <a class="nav-link" id="mine-link" href="#">Mine</a></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/add">Add new Sighting</a>
+                    </li>
+
+                </ul>
+            </div>
+            <span id="navtext" class="navbar-text navbar-right">
+                  <div id="username_display"></div>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#username-modal">
+                    Change profile
+                  </button>
+                </span>
+        </div>
+    </nav>
+</header>

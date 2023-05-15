@@ -24,6 +24,7 @@ const readUsernameSuccess = (ev) => {
         console.log("Username last stored:", username)
         document.getElementById('username_display').innerText = `Hello ${username}`
         document.getElementById('username').value = username
+        document.getElementById('username_input').value = username //in change profile input
         if (document.getElementById('sightings_username')!== null)
             document.getElementById('sightings_username').value = username //for add page
         document.getElementById('mine-link').href = `/mine?username=${username}`
@@ -60,8 +61,8 @@ let saveUserData = () => {
         idb.saveValue('usernames',requestIDB,username)
     if(location)
         idb.saveValue('locations',requestIDB,location)
-    location.reload();
-    // readUserData()
+
+    readUserData()
 }
 let readUserData = () => {
     idb.readValue('usernames',requestIDB, readUsernameSuccess,(ev) => {

@@ -11,19 +11,30 @@ const readUserDataSuccess = (ev) => {
     let location = ev.target.result.location
     console.log("Saved username: ", username)
     console.log("Saved location: ", location)
+    document.getElementById('username_input').value = username //to have it in modal form
     document.getElementById('username_display').innerText = `Hello ${username}`
     let add_username = document.getElementById('sightings_username');
     if (add_username !== null)
         add_username.value = username //for add page
-    document.getElementById('username').value = username;
 
+    hideUpdate();
     let nearByLink = document.getElementById('nearby-link')
     nearByLink.href = `/nearby?location=${location}`
 
-    mine();
+    let mineLine = document.getElementById('mine-link')
+    mineLine.href = `/mine?username=${username}`
 
 }
-
+function hideUpdate() {
+    try {
+        if (username !== document.getElementById('sightings_creator').value ) {
+            //hide button for updating sighting if user didnt create it
+            document.getElementById('update-id-button').hidden = "True" 
+        }
+    } catch (error) {
+        //ignore errors on diffrent sights
+    }
+}
 
 const handleSuccess = () => {
     console.log("Success")
@@ -80,17 +91,6 @@ let readUserData = () => {
 
 function toSighting(sightingId){
     window.location.href = `/sightings/${sightingId}?username=${username}`;
-}
-function mine(){
-    const userName = document.getElementById("username").value;
-    console.log(`The username is: ${userName}`);
-
-    const mineLink = document.getElementById('mine-link')
-    const submitButton = document.getElementById('submit-btn')
-    mineLink.addEventListener('click', function() {
-        submitButton.click();
-        console.log(userName);
-    });
 }
 
 //map for user

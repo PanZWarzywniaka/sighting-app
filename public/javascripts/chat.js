@@ -1,6 +1,6 @@
 let name = null;
 let roomNo = null;
-let socket = io();
+let socket;
 
 /**
  * called by <body onload>
@@ -12,30 +12,33 @@ function init(sightingData, username) {
     let chatDiv = document.getElementById("history");
     chatDiv.scrollTop = chatDiv.scrollHeight;
     //set all the values
-    // will change value when username stored in cookie/indexDB
     name = username;
     // roomNo will be the id of the sighting
     roomNo = sightingData._id;
-    // Then connect to the room
-    connectToRoom();
-    // called when someone joins the room. If it is someone else it notifies the joining of the room
-    socket.on('joined', function (room, userId) {
-        if (userId === name) {
-        } else {
-            // notifies that someone has joined the room
-            writeOnHistory(userId,' has joined the room ', true);
-        }
-    });
-    // called when a message is received
-    socket.on('chat', function (room, userId, chatText) {
-        let who = userId
-        if (userId === name) who = 'Me';
-        writeOnHistory(who, chatText,false);
-    });
-    /// Called when someone leaves the room
-    socket.on('left', function (room, userId) {
-        writeOnHistory(userId,'has left the room',true);
-    });
+    // Then connect to the room if online
+    if(navigator.onLine){
+        socket = io();
+        connectToRoom();
+        // called when someone joins the room. If it is someone else it notifies the joining of the room
+        socket.on('joined', function (room, userId) {
+            if (userId === name) {
+            } else {
+                // notifies that someone has joined the room
+                writeOnHistory(userId,' has joined the room ', true);
+            }
+        });
+        // called when a message is received
+        socket.on('chat', function (room, userId, chatText) {
+            let who = userId
+            if (userId === name) who = 'Me';
+            writeOnHistory(who, chatText,false);
+        });
+        /// Called when someone leaves the room
+        socket.on('left', function (room, userId) {
+            writeOnHistory(userId,'has left the room',true);
+        });
+    }
+
 
 }
 
@@ -46,7 +49,11 @@ function init(sightingData, username) {
 function sendChatText() {
     let userId = name;
     let chatText = document.getElementById('chat_input').value;
-    socket.emit('chat',userId,roomNo,chatText);
+    if (navigator.onLine)
+        socket.emit('chat',userId,roomNo,chatText);
+    else {
+        // add chat message to indexedDB
+    }
     let who = 'Me';
     writeOnHistory(who, chatText,false);
 }
@@ -104,6 +111,7 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
         if (isCurrentUser) {
             chatBox.setAttribute('class', 'chatContainer lighter');
             img.setAttribute("class", "right");
+            img.setAttribute("src","/images/me_avatar.png")
             spanDate.setAttribute("class", "time-left");
             spanTime.setAttribute("class", "time-left");
         } else {
@@ -134,6 +142,35 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
     chatDiv.scrollTop = chatDiv.scrollHeight;
     document.getElementById('chat_input').value = '';
 }
+
+// registering chat sync
+function registerChatSync() {
+    // only register sync when user offline
+    if(!navigator.onLine){
+        // add current chat to indexedDB
+        new Promise(function (resolve,reject) {
+            Notification.requestPermission(function(result) {
+                resolve();
+            })
+        }).then(function () {
+            return navigator.serviceWorker.ready;
+        }).then(function (reg) {
+            try {
+                return reg.sync.register("chat_sync");
+
+            } catch {
+                console.log("Background sync failed !");
+            }
+        }).then(function () {
+            console.info('Chat sync registered');
+        }).catch(function (err) {
+            console.error(`Failed to register chat sync ${err.message}`)
+        });
+    }
+
+}
+document.getElementById("chat_send").addEventListener("click",registerChatSync)
+document.getElementById("chat_send").addEventListener("click",sendChatText)
 
 
 

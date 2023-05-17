@@ -7,6 +7,15 @@ let navMarker;
 let requestIDB;
 
 $(window).on('load', function() {
+    let map = document.getElementById("nav_map")
+    let offline = document.getElementById("offline_pic")
+    if (navigator.onLine){
+        map.setAttribute("style", "display:block;")
+        offline.setAttribute("style", "display:none;")
+    } else {
+        offline.setAttribute("style", "display:block;")
+        map.setAttribute("style", "display:none;")
+    }
     readUserData()
 });
 
@@ -41,6 +50,7 @@ const readLocationSuccess = (ev) => {
         document.getElementById("nearby-link").classList.remove("disabled")
         document.getElementById("nearby_span").setAttribute("title","")
         location = ev.target.result.data
+        document.getElementById('loc').value = location
         console.log("Location last stored: ", location)
         document.getElementById('nearby-link').href = `/nearby?location=${location}`
     }
@@ -78,5 +88,14 @@ function initMapNav() {
     navMap = gMap.createMap("nav_map",true,[53.3811,-1.4701])
     navMap = gMap.addClickListener(navMap,'user_location',navMarker,true,"/images/user.png")
 }
+
+// registering service Worker
+navigator.serviceWorker.register("/serviceWorker.js").then(
+    (register) => {
+        console.log(`Registered: ${register.scope}`)
+    },
+    (err) => {
+        console.log(`Failed to register: ${err}`)
+    });
 window.initMapNav = initMapNav;
 

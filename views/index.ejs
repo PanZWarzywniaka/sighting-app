@@ -7,7 +7,7 @@
             <%= title %>
         </title>
 
-        <%- include('partials/head.ejs') %>
+        <%- include('../public/partials/head.ejs') %>
 
         <script src="/javascripts/index.js" ></script>
     </head>
@@ -16,7 +16,7 @@
 
 
 
-    <%- include('partials/header.ejs') %>
+    <%- include('../public/partials/header.ejs') %>
     <p id="demo"></p>
     <% if (data.length==0) {%>
         <p> There Are Currently No Sightings.</p>
@@ -73,5 +73,5 @@
             window.initMapNav()
         }
     </script>
-    <%- include('partials/footer.ejs') %>
+    <%- include('../public/partials/footer.ejs') %>
 </html>

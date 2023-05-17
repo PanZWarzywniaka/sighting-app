@@ -12,7 +12,6 @@ function init(sightingData, username) {
     let chatDiv = document.getElementById("history");
     chatDiv.scrollTop = chatDiv.scrollHeight;
     //set all the values
-    // will change value when username stored in cookie/indexDB
     name = username;
     // roomNo will be the id of the sighting
     roomNo = sightingData._id;
@@ -44,6 +43,8 @@ function init(sightingData, username) {
  * and sends the message via socket
  */
 function sendChatText() {
+    // register chat sync
+
     let userId = name;
     let chatText = document.getElementById('chat_input').value;
     socket.emit('chat',userId,roomNo,chatText);
@@ -104,6 +105,7 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
         if (isCurrentUser) {
             chatBox.setAttribute('class', 'chatContainer lighter');
             img.setAttribute("class", "right");
+            img.setAttribute("src","/images/me_avatar.png")
             spanDate.setAttribute("class", "time-left");
             spanTime.setAttribute("class", "time-left");
         } else {
@@ -134,6 +136,29 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
     chatDiv.scrollTop = chatDiv.scrollHeight;
     document.getElementById('chat_input').value = '';
 }
+
+// registering chat sync
+function registerChatSync() {
+    new Promise(function (resolve,reject) {
+        Notification.requestPermission(function(result) {
+            resolve();
+        })
+    }).then(function () {
+        return navigator.serviceWorker.ready;
+    }).then(function (reg) {
+        try {
+            reg.sync.register("chat_sync");
+        } catch {
+            console.log("Background sync failed !");
+        }
+    }).then(function () {
+        console.info('Chat sync registered');
+    }).catch(function (err) {
+        console.error(`Failed to register chat sync ${err.message}`)
+    });
+}
+document.getElementById("chat_send").addEventListener("click",registerChatSync)
+document.getElementById("chat_send").addEventListener("click",sendChatText)
 
 
 

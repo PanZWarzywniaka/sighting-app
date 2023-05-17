@@ -3,7 +3,15 @@
 <head>
     <title><%= title %></title>
     <%- include('../public/partials/head.ejs') %>
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<!--    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>-->
+    <script>
+        // only include socket io script if user online
+        if (navigator.onLine) {
+            let sio = document.createElement('script');
+            sio.src = 'https://cdn.socket.io/4.5.4/socket.io.min.js';
+            document.head.appendChild(sio);
+        }
+    </script>
     <script type="module" src="/javascripts/sighting.js"></script>
 </head>
 <!--Will get users username from cookie-->

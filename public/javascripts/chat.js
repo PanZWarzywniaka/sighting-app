@@ -1,6 +1,6 @@
 let name = null;
 let roomNo = null;
-let socket = io();
+let socket;
 
 /**
  * called by <body onload>
@@ -15,26 +15,30 @@ function init(sightingData, username) {
     name = username;
     // roomNo will be the id of the sighting
     roomNo = sightingData._id;
-    // Then connect to the room
-    connectToRoom();
-    // called when someone joins the room. If it is someone else it notifies the joining of the room
-    socket.on('joined', function (room, userId) {
-        if (userId === name) {
-        } else {
-            // notifies that someone has joined the room
-            writeOnHistory(userId,' has joined the room ', true);
-        }
-    });
-    // called when a message is received
-    socket.on('chat', function (room, userId, chatText) {
-        let who = userId
-        if (userId === name) who = 'Me';
-        writeOnHistory(who, chatText,false);
-    });
-    /// Called when someone leaves the room
-    socket.on('left', function (room, userId) {
-        writeOnHistory(userId,'has left the room',true);
-    });
+    // Then connect to the room if online
+    if(navigator.onLine){
+        socket = io();
+        connectToRoom();
+        // called when someone joins the room. If it is someone else it notifies the joining of the room
+        socket.on('joined', function (room, userId) {
+            if (userId === name) {
+            } else {
+                // notifies that someone has joined the room
+                writeOnHistory(userId,' has joined the room ', true);
+            }
+        });
+        // called when a message is received
+        socket.on('chat', function (room, userId, chatText) {
+            let who = userId
+            if (userId === name) who = 'Me';
+            writeOnHistory(who, chatText,false);
+        });
+        /// Called when someone leaves the room
+        socket.on('left', function (room, userId) {
+            writeOnHistory(userId,'has left the room',true);
+        });
+    }
+
 
 }
 
@@ -43,11 +47,13 @@ function init(sightingData, username) {
  * and sends the message via socket
  */
 function sendChatText() {
-    // register chat sync
-
     let userId = name;
     let chatText = document.getElementById('chat_input').value;
-    socket.emit('chat',userId,roomNo,chatText);
+    if (navigator.onLine)
+        socket.emit('chat',userId,roomNo,chatText);
+    else {
+        // add chat message to indexedDB
+    }
     let who = 'Me';
     writeOnHistory(who, chatText,false);
 }

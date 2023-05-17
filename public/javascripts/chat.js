@@ -145,23 +145,29 @@ function writeOnHistory(userId,text,isChatRoomNotif) {
 
 // registering chat sync
 function registerChatSync() {
-    new Promise(function (resolve,reject) {
-        Notification.requestPermission(function(result) {
-            resolve();
-        })
-    }).then(function () {
-        return navigator.serviceWorker.ready;
-    }).then(function (reg) {
-        try {
-            reg.sync.register("chat_sync");
-        } catch {
-            console.log("Background sync failed !");
-        }
-    }).then(function () {
-        console.info('Chat sync registered');
-    }).catch(function (err) {
-        console.error(`Failed to register chat sync ${err.message}`)
-    });
+    // only register sync when user offline
+    if(!navigator.onLine){
+        // add current chat to indexedDB
+        new Promise(function (resolve,reject) {
+            Notification.requestPermission(function(result) {
+                resolve();
+            })
+        }).then(function () {
+            return navigator.serviceWorker.ready;
+        }).then(function (reg) {
+            try {
+                return reg.sync.register("chat_sync");
+
+            } catch {
+                console.log("Background sync failed !");
+            }
+        }).then(function () {
+            console.info('Chat sync registered');
+        }).catch(function (err) {
+            console.error(`Failed to register chat sync ${err.message}`)
+        });
+    }
+
 }
 document.getElementById("chat_send").addEventListener("click",registerChatSync)
 document.getElementById("chat_send").addEventListener("click",sendChatText)

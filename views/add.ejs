@@ -3,14 +3,13 @@
 
 <head>
     <title><%= title %></title>
-    <%- include('partials/head.ejs') %>
+    <%- include('../public/partials/head.ejs') %>
 
-    <script type="module" src="/javascripts/add.js"></script>
 </head>
 
 <body>
 
-<%- include('partials/header.ejs') %>
+<%- include('../public/partials/header.ejs') %>
 <p id="map-instructions">Click on the map to add a marker.</p>
 <div id="map-container"><div id="map"></div></div>
 
@@ -51,12 +50,12 @@
   </form>
   <div id="imgTest"></div>
 </body>
-
+<script type="module" src="/javascripts/add.js"></script>
 <script >
   function initialize(){
     window.initMapNav()
     window.initMap()
   }
 </script>
-<%- include('partials/footer.ejs') %>
+<%- include('../public/partials/footer.ejs') %>
 </html>

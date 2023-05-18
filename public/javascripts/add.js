@@ -1,4 +1,5 @@
 import * as gMap from './map.js';
+import * as idb from "./indexedDB.js";
 
 let map;
 let marker;
@@ -9,8 +10,60 @@ function initMap() {
     marker = gMap.addClickListener(map,'location',marker,true,"/images/bird.png")
 }
 
+let requestIDB = idb.connectToIDB(() => {
+    console.log("connected to idb on add page")
+});
 
+
+function registerSightingSync() {
+    // only register sync when user offline
+
+    let identification = document.getElementById('identification').value
+    let description = document.getElementById('description').value
+    let lastSeen = document.getElementById('last_seen').value
+    let image = undefined
+    // maybe say image is null?
+    let username = document.getElementById('username').value
+    let location = document.getElementById('location').value
+    const sighting = {
+        identification: identification,
+        description: description,
+        lastSeen: lastSeen,
+        image: image,
+        username: username,
+        location: location
+    };
+
+
+    if(!navigator.onLine){
+        // add current chat to indexedDB
+        if(sighting){
+            idb.saveValue("sightings",requestIDB,sighting)
+        }
+        console.log("Chat saved!")
+        new Promise(function (resolve,reject) {
+            Notification.requestPermission(function(result) {
+                resolve();
+            })
+        }).then(function () {
+            return navigator.serviceWorker.ready;
+        }).then(function (reg) {
+            try {
+                return reg.sync.register("sighting_sync");
+
+            } catch {
+                console.log("Background sync failed !");
+            }
+        }).then(function () {
+            console.info('Sighting sync registered');
+        }).catch(function (err) {
+            console.error(`Failed to register sighting sync ${err.message}`)
+        });
+    }
+
+}
 function onSubmit(event) {
+    registerSightingSync()
     event.preventDefault();
     let form = document.querySelector('#xForm');
     let last_seen = new Date(document.getElementById('last_seen').value);
@@ -39,11 +92,18 @@ function onSubmit(event) {
         alert('Please enter a valid date');
         return;
     }
-    form.submit()
+    if(!navigator.onLine){
+        //post to indexedDB
+        window.location.replace("/offline");
+    }
+    else
+        form.submit()
 
 }
 
+window.onSubmit = onSubmit;
 window.initMap = initMap;
+
 
 function encode() {
     console.log("test");

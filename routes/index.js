@@ -31,6 +31,9 @@ var upload = multer({ storage: storage });
 router.get('/', function(req, res, next) {
     sighting.list_recent(req,res,next);
 });
+router.get('/offline', function(req, res, next) {
+    res.render('offline', { title: 'OFFLINE' });
+});
 
 
 router.get('/nearby', function(req, res, next) {

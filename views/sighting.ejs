@@ -13,6 +13,7 @@
         }
     </script>
     <script type="module" src="/javascripts/sighting.js"></script>
+    <script type="module" src="/javascripts/sync_chat.js"></script>
 </head>
 <!--Will get users username from cookie-->
 <body onload="init(<%= JSON.stringify(data) %>,'<%=username%>')">
@@ -170,7 +171,7 @@
                     <p>
                         <label for="name"> chat: </label>
                         <input type="text" id="chat_input" name="chat_input">
-                        <button id="chat_send">Send</button>
+                        <button id="chat_send" onclick="registerChatSync(<%= JSON.stringify(data) %>,'<%=username%>')">Send</button>
                     </p>
                 </form>
                

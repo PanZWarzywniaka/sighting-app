@@ -1,6 +1,3 @@
-import * as idb from "./javascripts/indexedDB.js";
-let requestIDB;
-
 const CACHE_STATIC_NAME = 'static-sighting';
 const CACHE_DYNAMIC_NAME = 'static-sighting';
 let cache= null;
@@ -42,10 +39,6 @@ self.addEventListener('install', function (e) {
 
 //clear cache on reload
 self.addEventListener('activate', function (e) {
-    // initialise idb in this event listener
-    requestIDB = idb.connectToIDB(() => {
-        console.log("connected to idb on add page")
-    });
     console.log('[ServiceWorker] Activate');
     e.waitUntil(
         caches.keys().then(function (keyList) {

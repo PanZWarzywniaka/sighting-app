@@ -21,7 +21,7 @@ let filesToCache = [
     '/images/no_image.png',
     '/images/offline_pic.png',
     '/images/pwa_logo.png',
-    '/user.png',
+    '/images/user.png',
     'birds.csv'
 
 ];

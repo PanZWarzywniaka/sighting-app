@@ -6,7 +6,7 @@ function connectToIDB(handleSuccess){
         db.createObjectStore("usernames", {keyPath: "id"})
         db.createObjectStore("locations", {keyPath: "id"})
         db.createObjectStore("sightings", {keyPath: "id"})
-        db.createObjectStore("chats", {keyPath: ["id", "userId", "roomNo"]})
+        db.createObjectStore("chats", {keyPath: "id"})
     }
 
     const handleError = (err) => {
@@ -50,7 +50,8 @@ function saveValueChat(requestIDB, userId, roomNo, chat) {
     const myIDB = requestIDB.result
     const transaction = myIDB.transaction('chats', 'readwrite');
     const myStore = transaction.objectStore('chats')
-    myStore.add(chat, userId, roomNo);
+    let chatObject = {chat, userId, roomNo};
+    myStore.add(chatObject);
 
     console.log('Chat message stored in IndexedDB');
 }

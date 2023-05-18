@@ -17,6 +17,20 @@ const readUsernameSuccess = (ev) => {
         document.getElementById("mine-link").classList.add("disabled")
         document.getElementById("mine_span").setAttribute("title","Must enter Username to view")
         $('#username-modal').modal('show'); //show modal
+
+        //dissable the chat
+        let chatInput = document.getElementById('chat_input')
+        if (chatInput!== null) {
+            chatInput.value = "Chat Disable, Set your username to use the chat"
+            chatInput.disabled = true
+        }
+        
+        let submitSighting = document.getElementById('g')
+        if (submitSighting!== null) {
+            submitSighting.value = "Need log in first"
+            submitSighting.disabled = true
+        }
+
     } else {
         document.getElementById("mine_span").setAttribute("title","")
         document.getElementById("mine-link").classList.remove("disabled")

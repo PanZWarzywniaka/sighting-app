@@ -3,10 +3,10 @@ function connectToIDB(handleSuccess){
     const handleUpgrade = (ev) => {
         const db = ev.target.result
         console.log("Upgrading")
-        db.createObjectStore("usernames", {keyPath: "id"})
-        db.createObjectStore("locations", {keyPath: "id"})
-        db.createObjectStore("sightings", {keyPath: "id"})
-        db.createObjectStore("chats", {keyPath: "id"})
+        db.createObjectStore("usernames", {keyPath: "id",autoIncrement: true})
+        db.createObjectStore("locations", {keyPath: "id",autoIncrement: true})
+        db.createObjectStore("sightings", {keyPath: "id",autoIncrement: true})
+        db.createObjectStore("chats", {keyPath: "id", autoIncrement: true})
     }
 
     const handleError = (err) => {
@@ -38,9 +38,9 @@ function saveValue(objectStoreName, requestIDB, value){
     const transaction = myIDB.transaction([objectStoreName], "readwrite")
     const myStore = transaction.objectStore(objectStoreName)
 
-
-    myStore.clear() //clear past data if exists
-    myStore.add({id: 1, data: value})
+    if (objectStoreName === "locations" || objectStoreName === "usernames")
+        myStore.clear() //clear past data if exists
+    myStore.add({data: value})
     console.log(`value: ${value} was saved in the ${objectStoreName} store in IDb`)
 
 }

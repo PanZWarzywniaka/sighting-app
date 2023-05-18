@@ -1,6 +1,8 @@
+import * as idb from './indexedDB.js';
 let name = null;
 let roomNo = null;
 let socket;
+let requestIDB;
 
 /**
  * called by <body onload>
@@ -42,6 +44,11 @@ function init(sightingData, username) {
 
 }
 
+const handleSuccess = () => {
+    console.log("Successfully opened idexed db for nav")
+}
+requestIDB = idb.connectToIDB(handleSuccess);
+
 /**
  * called when the Send button is pressed. It gets the text to send from the interface
  * and sends the message via socket
@@ -53,6 +60,7 @@ function sendChatText() {
         socket.emit('chat',userId,roomNo,chatText);
     else {
         // add chat message to indexedDB
+        idb.saveValueChat(requestIDB, userId, roomNo, chatText);
     }
     let who = 'Me';
     writeOnHistory(who, chatText,false);

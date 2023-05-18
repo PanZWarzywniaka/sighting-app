@@ -1,0 +1,17 @@
+{
+  "lang": "en-uk",
+  "name": "Bird Sighting app",
+  "short_name": "Bird Sightings",
+  "description": "A PWA to share and see bird sightings in your area",
+  "start_url": "/",
+  "background_color": "#617d57",
+  "theme_color": "#617d57",
+  "orientation": "any",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/images/pwa_logo.png",
+      "sizes": "512x512"
+    }
+  ]
+}

@@ -10,7 +10,7 @@
   "display": "standalone",
   "icons": [
     {
-      "src": "public/images/pwa_logo.png",
+      "src": "images/pwa_logo.png",
       "sizes": "512x512"
     }
   ]

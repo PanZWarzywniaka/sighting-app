@@ -15,6 +15,13 @@ let filesToCache = [
     '/partials/head.ejs',
     '/partials/header.ejs',
     '/partials/footer.ejs',
+    '/manifest.json',
+    '/images/bird.png',
+    '/images/me_avatar.png',
+    '/images/no_image.png',
+    '/images/offline_pic.png',
+    '/images/pwa_logo.png',
+    '/user.png',
     'birds.csv'
 
 ];

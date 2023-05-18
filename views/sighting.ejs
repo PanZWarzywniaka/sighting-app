@@ -2,14 +2,21 @@
 <html>
 <head>
     <title><%= title %></title>
-    <%- include('partials/head.ejs') %>
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <script src="/javascripts/chat.js"></script>
+    <%- include('../public/partials/head.ejs') %>
+<!--    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>-->
+    <script>
+        // only include socket io script if user online
+        if (navigator.onLine) {
+            let sio = document.createElement('script');
+            sio.src = 'https://cdn.socket.io/4.5.4/socket.io.min.js';
+            document.head.appendChild(sio);
+        }
+    </script>
     <script type="module" src="/javascripts/sighting.js"></script>
 </head>
 <!--Will get users username from cookie-->
 <body onload="init(<%= JSON.stringify(data) %>,'<%=username%>')">
-    <%- include('partials/header.ejs') %>
+    <%- include('../public/partials/header.ejs') %>
 
     <!-- create modal  if abstract exists -->
 
@@ -141,7 +148,7 @@
                             <div class="chatContainer lighter">
                                 <strong><%=chats[i].username%></strong>
                                 <span class="time-left"><%=date%></span>
-                                <img src="https://ui-avatars.com/api/?rounded=true&background=random&name=<%=chats[i].username%>" alt="Avatar" class="right" style="width:100%;">
+                                <img src="/images/me_avatar.png" alt="Avatar" class="right" style="width:100%;">
                                 <p><%=chats[i].message%></p>
                                 <span class="time-left"><%=time%></span>
                             </div>
@@ -163,7 +170,7 @@
                     <p>
                         <label for="name"> chat: </label>
                         <input type="text" id="chat_input" name="chat_input">
-                        <button id="chat_send" onclick="sendChatText()">Send</button>
+                        <button id="chat_send">Send</button>
                     </p>
                 </form>
                
@@ -175,11 +182,12 @@
     </div>
 </div>
 </body>
+<script src="/javascripts/chat.js"></script>
 <script >
     function initialize(){
         window.initMapNav()
         window.initMap()
     }
 </script>
-<%- include('partials/footer.ejs') %>
+<%- include('../public/partials/footer.ejs') %>
 </html>

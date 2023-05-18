@@ -3,14 +3,13 @@
 
 <head>
     <title><%= title %></title>
-    <%- include('partials/head.ejs') %>
+    <%- include('../public/partials/head.ejs') %>
 
-    <script type="module" src="/javascripts/add.js"></script>
 </head>
 
 <body>
 
-<%- include('partials/header.ejs') %>
+<%- include('../public/partials/header.ejs') %>
 <p id="map-instructions">Click on the map to add a marker.</p>
 <div id="map-container"><div id="map"></div></div>
 
@@ -41,8 +40,8 @@
       <div class="div-input"><input class="input" type="datetime-local" name="last_seen" id="last_seen" required></div>
     </div>
     <div id="image-div">
-      <div><label id="image-label" class="control-label" for="myImage">Choose an image: </label></div>
-      <div id="image-input"><input type="file" id="myImage" name="myImg" accept="image/*"></div>
+        <div><label id="image-label" class="control-label" for="myImage">Choose an image: </label></div>
+        <div id="image-input"><input type="file" id="myImage" name="myImg" onchange="encode()" accept="image/*" ></div>
     </div>
     <input type="hidden" name="username" id="sightings_username">
     <input type="hidden" name="location" id="location">
@@ -50,12 +49,12 @@
     <p><input type="submit" name="g" value="Submit" id="g" onclick="onSubmit(event)"></p>
   </form>
 </body>
-
+<script type="module" src="/javascripts/add.js"></script>
 <script >
   function initialize(){
     window.initMapNav()
     window.initMap()
   }
 </script>
-<%- include('partials/footer.ejs') %>
+<%- include('../public/partials/footer.ejs') %>
 </html>

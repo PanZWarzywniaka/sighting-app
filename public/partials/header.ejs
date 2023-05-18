@@ -17,7 +17,10 @@
 
                         <div class="form-group">
                             <label for="username_input">Location:</label>
-                            <div id="map-container"><div id="nav_map"></div></div>
+                            <div id="map-container">
+                                <div id="nav_map"></div>
+                                <img id="offline_pic" alt="offline image" width="100%" height="100%" src="/images/offline_pic.png">
+                            </div>
                             <input type="hidden" name="user_location" id="user_location">
                         </div>
                     </form>
@@ -30,6 +33,7 @@
         </div>
     </div>
     <input id="username" name="username" hidden="hidden">
+    <input id="loc" name="loc" hidden="hidden">
 
 
     <!-- NAV BAR -->

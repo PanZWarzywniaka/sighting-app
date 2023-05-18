@@ -39,10 +39,16 @@ function onSubmit(event) {
         alert('Please enter a valid date');
         return;
     }
-    form.submit()
+    if(!navigator.onLine){
+        //post to indexedDB
+        window.location.replace("/offline");
+    }
+    else
+        form.submit()
 
 }
 
+window.onSubmit = onSubmit;
 window.initMap = initMap;
 
 function encode() {

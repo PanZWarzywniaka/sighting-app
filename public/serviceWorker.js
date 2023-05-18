@@ -15,6 +15,13 @@ let filesToCache = [
     '/partials/head.ejs',
     '/partials/header.ejs',
     '/partials/footer.ejs',
+    '/manifest.json',
+    '/images/bird.png',
+    '/images/me_avatar.png',
+    '/images/no_image.png',
+    '/images/offline_pic.png',
+    '/images/pwa_logo.png',
+    '/user.png',
     'birds.csv'
 
 ];
@@ -22,12 +29,9 @@ self.addEventListener('install', function (e) {
     console.log('[ServiceWorker] Install');
     e.waitUntil(
         caches.open(CACHE_STATIC_NAME).then(function (cacheX) {
-            // cache offline page
+            console.log('[ServiceWorker] Caching app shell');
             cache= cacheX;
-            cache.add(new Request ("/offline.html")).then( () => {
-                console.log('[ServiceWorker] Caching app shell');
-                return cache.addAll(filesToCache);
-            })
+            return cache.addAll(filesToCache);
         }).catch((err) => {
             console.log(`Error: ${err}`)
         })
@@ -69,9 +73,10 @@ self.addEventListener('fetch', (event) => {
                     // when offline return cached requests
                     // need to change this so if:
                     // event.request.url contains "/add" and event.request.method === "POST"
-                    if (event.request.url.indexOf("/add") > -1 && event.request.method === "POST")
-                        console.log("*******************YOU HAVE CREATED A SIGHTING WHEN OFFLINE**********************")
+
+
                     // then sighting needs to be added to indexedDB
+
                     return caches.match(event.request)
                 })
         )

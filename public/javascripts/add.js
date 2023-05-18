@@ -22,6 +22,7 @@ function registerSightingSync() {
     let description = document.getElementById('description').value
     let lastSeen = document.getElementById('last_seen').value
     let image = undefined
+    // maybe say image is null?
     let username = document.getElementById('username').value
     let location = document.getElementById('location').value
     const sighting = {

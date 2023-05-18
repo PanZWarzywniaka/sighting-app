@@ -23,35 +23,5 @@
         window.initMapNav()
     }
 </script>
-<!--<script type="module">-->
-<!--    import * as idb from "/javascripts/indexedDB.js";-->
-<!--    let requestIDB;-->
-<!--    $(window).on('load', function() {-->
-<!--        readUserData()-->
-<!--    });-->
-
-<!--    requestIDB = idb.connectToIDB(() => {-->
-<!--        console.log("connected to idb on offline page")-->
-<!--    });-->
-
-<!--    const readSightingSuccess = (ev) => {-->
-<!--        if (ev.target.result === undefined){-->
-<!--            console.error("There is no image in the database")-->
-<!--        } else {-->
-<!--            let sighting = ev.target.result.data-->
-<!--            console.log(sighting.username)-->
-<!--            document.getElementById("u").innerHTML = sighting.username-->
-<!--            document.getElementById("s_img").setAttribute("src",sighting.image)-->
-<!--        }-->
-
-<!--    }-->
-
-<!--    let readUserData = () => {-->
-<!--        idb.readValue('sightings',requestIDB, readSightingSuccess,(ev) => {-->
-<!--            console.log("There was an error reading the username")-->
-<!--        })-->
-<!--    }-->
-<!--    readUserData()-->
-<!--</script>-->
 <%- include('../public/partials/footer.ejs') %>
 </html>

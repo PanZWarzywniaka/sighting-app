@@ -5,6 +5,7 @@ const fs = require('fs'); //file system
 
 //sighting controller 
 let sighting = require('../controllers/sightings');
+let chat = require('../controllers/chats')
 
 //Multer storage config
 let multer = require('multer');
@@ -33,6 +34,23 @@ router.get('/', function(req, res, next) {
 });
 router.get('/offline', function(req, res, next) {
     res.render('offline', { title: 'OFFLINE' });
+});
+
+router.post('/sync-chat', function(req, res, next) {
+    for(let i = 0; i < req.body.length; i++){
+        let chat_obj = req.body[i]
+        chat.create(chat_obj.data)
+    }
+    res.status(200).json({ message: 'Chats synced successfully.', store:'chats' });
+});
+
+
+router.post('/sync-sighting', function(req, res, next) {
+    for(let i = 0; i < req.body.length; i++){
+        let sighting_obj = req.body[i]
+        sighting.createFromSync(sighting_obj.data)
+    }
+    return res.status(200).json({ message: 'Sightings synced successfully.' , store:'sightings'});
 });
 
 

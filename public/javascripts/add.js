@@ -18,18 +18,17 @@ let requestIDB = idb.connectToIDB(() => {
 function registerSightingSync() {
     // only register sync when user offline
 
-    let identification = document.getElementById('identification').value
+    let identification = document.getElementById('identification').value.trim()
     let description = document.getElementById('description').value
     let lastSeen = document.getElementById('last_seen').value
-    let image = undefined
-    // maybe say image is null?
+    let image = null
     let username = document.getElementById('username').value
     let location = document.getElementById('location').value
     const sighting = {
         identification: identification,
         description: description,
-        lastSeen: lastSeen,
-        image: image,
+        last_seen: lastSeen,
+        img: image,
         username: username,
         location: location
     };
@@ -49,8 +48,8 @@ function registerSightingSync() {
             return navigator.serviceWorker.ready;
         }).then(function (reg) {
             try {
+                console.log("FIRING SITGHTING SYNC")
                 return reg.sync.register("sighting_sync");
-
             } catch {
                 console.log("Background sync failed !");
             }
@@ -93,8 +92,7 @@ function onSubmit(event) {
         return;
     }
     if(!navigator.onLine){
-        //post to indexedDB
-        window.location.replace("/offline");
+        window.location.replace("/");
     }
     else
         form.submit()

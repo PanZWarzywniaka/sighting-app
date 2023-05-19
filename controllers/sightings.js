@@ -35,6 +35,20 @@ exports.create = function (req, res) {
     });
 };
 
+exports.createFromSync = function(sightingObj){
+    let loc = sightingObj.location.split(",");
+    sightingObj.location = {
+        type: "Point",
+        coordinates: [parseFloat(loc[0]), parseFloat(loc[1])]
+    }
+    let sighting = new Sighting(sightingObj)
+    sighting.save(function (err, results) {
+        if (err) {
+            console.log(`Error saving sighting during sync ${err}`)
+        }
+    });
+}
+
 exports.list_nearby = function (req, res, next) {
     // get position of current user to find the nearest sightings
     

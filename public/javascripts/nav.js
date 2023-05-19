@@ -90,7 +90,7 @@ function initMapNav() {
 }
 
 // registering service Worker
-navigator.serviceWorker.register("/serviceWorker.js").then(
+navigator.serviceWorker.register("/serviceWorker.js", { type: 'module' }).then(
     (register) => {
         console.log(`Registered: ${register.scope}`)
     },

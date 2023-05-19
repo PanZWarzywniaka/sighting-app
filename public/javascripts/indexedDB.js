@@ -32,6 +32,27 @@ function readValue(objectStoreName, requestIDB, readValueSuccess, readValueError
     savedValue.addEventListener("error", readValueError)
 }
 
+function readAllValues(objectStoreName, requestIDB, readValueSuccess){
+    const myIDB = requestIDB.result
+    const transaction = myIDB.transaction([objectStoreName], "readwrite")
+    const myStore = transaction.objectStore(objectStoreName)
+
+    let allValues = myStore.getAll()
+    allValues.addEventListener("success", readValueSuccess)
+    allValues.addEventListener("error", (err) =>{
+        console.log(`Failed to read all values in ${objectStoreName}: ${err}`)
+    })
+}
+
+function clearStore(objectStoreName, requestIDB){
+    const myIDB = requestIDB.result
+    const transaction = myIDB.transaction([objectStoreName], "readwrite")
+    const myStore = transaction.objectStore(objectStoreName)
+    myStore.clear()
+}
+
+
+
 // only for location and username
 function saveValue(objectStoreName, requestIDB, value){
     const myIDB = requestIDB.result
@@ -45,4 +66,4 @@ function saveValue(objectStoreName, requestIDB, value){
 
 }
 
-export { connectToIDB,readValue, saveValue };
+export { connectToIDB,readValue,readAllValues,saveValue,clearStore};

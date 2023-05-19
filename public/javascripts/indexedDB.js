@@ -28,7 +28,10 @@ function connectToIDB(handleSuccess){
 
 /**
  * Helper function to read value from IndexDB
- * only for location and username
+ * @param objectStoreName - name of object store thats being read from
+ * @param requestIDB - IDB instance
+ * @param readValueSuccess - success handler for successfull read
+ * @param readValueError - error handler for unsuccessfull read
  */
 function readValue(objectStoreName, requestIDB, readValueSuccess, readValueError){
     const myIDB = requestIDB.result
@@ -39,7 +42,12 @@ function readValue(objectStoreName, requestIDB, readValueSuccess, readValueError
     savedValue.addEventListener("success", readValueSuccess)
     savedValue.addEventListener("error", readValueError)
 }
-
+/**
+ * Helper function to read all values from an object store in IndexDB
+ * @param objectStoreName - name of object store thats being read from
+ * @param requestIDB - IDB instance
+ * @param readValueSuccess - success handler for successfull readAll
+ */
 function readAllValues(objectStoreName, requestIDB, readValueSuccess){
     const myIDB = requestIDB.result
     const transaction = myIDB.transaction([objectStoreName], "readwrite")
@@ -51,7 +59,12 @@ function readAllValues(objectStoreName, requestIDB, readValueSuccess){
         console.log(`Failed to read all values in ${objectStoreName}: ${err}`)
     })
 }
-
+/**
+ * Helper function to clear the contents of an object store
+ * @param objectStoreName - object store that's being cleared
+ * @param requestIDB - IDB instance
+ *
+ */
 function clearStore(objectStoreName, requestIDB){
     const myIDB = requestIDB.result
     const transaction = myIDB.transaction([objectStoreName], "readwrite")

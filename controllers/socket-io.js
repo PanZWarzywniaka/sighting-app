@@ -1,5 +1,9 @@
 chat = require("./chats");
 
+/**
+ * initializes socket io
+ * @param io
+ */
 exports.init = function(io) {
     io.sockets.on('connection', function (socket) {
         try {

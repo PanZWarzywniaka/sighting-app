@@ -72,7 +72,7 @@ function registerSightingSync() {
 /**
  * Handles on submit form when user
  * wants to submit a new sighting
- * Validates the form
+ * Validates the form and registers sighting syc if user offline
  */
 function onSubmit(event) {
     registerSightingSync()

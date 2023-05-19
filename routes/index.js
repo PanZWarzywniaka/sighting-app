@@ -35,7 +35,9 @@ router.get('/', function(req, res, next) {
 router.get('/offline', function(req, res, next) {
     res.render('offline', { title: 'OFFLINE' });
 });
-
+/**
+ * for each chat from Idb, create and save the chat
+ */
 router.post('/sync-chat', function(req, res, next) {
     for(let i = 0; i < req.body.length; i++){
         let chat_obj = req.body[i]
@@ -44,7 +46,9 @@ router.post('/sync-chat', function(req, res, next) {
     res.status(200).json({ message: 'Chats synced successfully.', store:'chats' });
 });
 
-
+/**
+ * for each sighting from Idb, create and save the sighting
+ */
 router.post('/sync-sighting', function(req, res, next) {
     for(let i = 0; i < req.body.length; i++){
         let sighting_obj = req.body[i]

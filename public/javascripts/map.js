@@ -36,7 +36,7 @@ function createMap(mapId, useUserLoc, loc) {
  * @param {*} map div element
  * @param {*} locationStoreElement 
  * @param {*} marker 
- * @param {*} canAddMarker 
+ * @param {*} canAddMarker - boolean to see if map should allow markers to be addedd
  * @param {*} iconPath what Icon to use
  * @returns 
  */

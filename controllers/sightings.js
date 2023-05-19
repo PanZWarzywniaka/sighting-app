@@ -42,6 +42,10 @@ exports.create = function (req, res) {
     });
 };
 
+/**
+ * creates and saves sighting when sighting object given
+ * @param sightingObj
+ */
 exports.createFromSync = function(sightingObj){
     let loc = sightingObj.location.split(",");
     sightingObj.location = {

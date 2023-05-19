@@ -27,6 +27,9 @@ let filesToCache = [
     'birds.csv'
 
 ];
+/**
+ * installing service worker
+ */
 self.addEventListener('install', function (e) {
     console.log('[ServiceWorker] Install');
     e.waitUntil(
@@ -40,7 +43,9 @@ self.addEventListener('install', function (e) {
     );
 });
 
-//clear cache on reload
+/**
+ * activates service worker and initialises indexDB
+ */
 self.addEventListener('activate', function (e) {
     requestIDB = idb.connectToIDB(() => {
         console.log("connected to idb on Service Worker")
@@ -58,7 +63,10 @@ self.addEventListener('activate', function (e) {
     );
     return self.clients.claim();
 })
-
+/**
+ * defines what service worker should do for fetching
+ * network first -> update cache and if offline serve from cache
+ */
 self.addEventListener('fetch', (event) => {
     try{
         event.respondWith(
@@ -82,6 +90,11 @@ self.addEventListener('fetch', (event) => {
     }
 
 });
+/**
+ * success handler for reading all sightings from sighting store
+ * sends list of sightings to be added to mogodb
+ * @param ev
+ */
 const readSightingsSuccess = (ev) => {
     if(ev.target.result !== undefined){
 
@@ -93,7 +106,11 @@ const readSightingsSuccess = (ev) => {
     } else
         console.log('There are no sightings to read')
 }
-
+/**
+ * success handler for reading all chats from chat store
+ * sends list of chats to be added to mogodb
+ * @param ev
+ */
 const readChatsSuccess = (ev) => {
     if(ev.target.result !== undefined){
 
@@ -105,7 +122,15 @@ const readChatsSuccess = (ev) => {
     } else
         console.log('There are no sightings to read')
 }
-// function to send data to mongoDB <- usually used after readAllValues
+
+/**
+ * function to send list of objects to mongodb
+ * fetches the endpoints and endpoints add to mongoDB
+ * @param objects - objects to be added
+ * @param endpoint - which endpoint being used
+ * @param objectStoreName - which object store objects came from
+ * @returns {Promise<Response>}
+ */
 function sendToMongoDB(objects,endpoint,objectStoreName){
     const data = JSON.stringify(objects)
     const headers = new Headers()
@@ -126,6 +151,10 @@ function sendToMongoDB(objects,endpoint,objectStoreName){
         console.error(`Error: ${error.message}`)
     })
 }
+
+/**
+ * defines what service worker should do for a sync event
+ */
 self.addEventListener('sync', (event) => {
     console.info('Event: Sync', event);
     if(event.tag === 'chat_sync') {

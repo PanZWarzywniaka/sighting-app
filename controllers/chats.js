@@ -7,7 +7,7 @@ const Sighting = require("../models/sightings"); //file system
  * Creates a new chat object and stores in MongoDB
  * that draw the image will incrementally paint on the screen. 
  *
- * @param  chatData  achat data to be stored in server DB
+ * @param  chatData  a chat data to be stored in server DB
 */
 exports.create = function (chatData) {
 
@@ -26,6 +26,7 @@ exports.create = function (chatData) {
 
 /**
  * Final controller for viewing a sighting, lists all chats from MongoDB
+ * and renders the sighting page
  * @param req
  * @param res
  * @param sightingObj

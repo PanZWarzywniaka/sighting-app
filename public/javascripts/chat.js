@@ -6,6 +6,8 @@ let socket;
  * called by <body onload>
  * it initialises the interface and the expected socket messages
  * plus the associated actions
+ * @param sightingData - the sighting object
+ * @param username - username of person currently viewing sighting
  */
 function init(sightingData, username) {
     // scroll to the bottom of the chat div

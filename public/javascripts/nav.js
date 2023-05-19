@@ -109,6 +109,10 @@ let saveUserData = () => {
 
     readUserData()
 }
+
+/**
+ * reads users ysername and location from IDB
+ */
 let readUserData = () => {
     idb.readValue('usernames',requestIDB, readUsernameSuccess,(ev) => {
         console.log("There was an error reading the username")

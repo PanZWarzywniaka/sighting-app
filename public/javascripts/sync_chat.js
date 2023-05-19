@@ -3,6 +3,12 @@ import * as idb from "./indexedDB.js";
 let requestIDB = idb.connectToIDB(() => {
     console.log("connected to idb on chat page")
 });
+
+/**
+ * Registers a sync event when user is offline and adds chat to IDB
+ * @param sightingData - sighting object
+ * @param username - username of user submitting chat
+ */
 function registerChatSync(sightingData, username) {
     // only register sync when user offline
     let roomNo = sightingData._id
@@ -35,6 +41,5 @@ function registerChatSync(sightingData, username) {
     }
 
 }
+// creating function in window for use when loading
 window.registerChatSync = registerChatSync;
-
-// document.getElementById("chat_send").addEventListener("click",registerChatSync)

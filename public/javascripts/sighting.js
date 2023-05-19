@@ -2,7 +2,9 @@ import * as gMap from './map.js';
 
 let map;
 let marker;
-
+/**
+ * Initialize map to show birds location
+ */
 function initMap() {
     let map_data = document.getElementById("location");
     let coords = map_data.dataset.loc.split(',');

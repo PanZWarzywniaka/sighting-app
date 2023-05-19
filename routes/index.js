@@ -56,7 +56,8 @@ router.post('/sightings/:sightingId',function(req,res){
 
 
 router.get('/add', function(req, res, next) {
-
+ 
+  //read list of all bird species so user can choose from drop down list
   const bird_data = fs.readFileSync('public/birds.csv', 'utf-8')
   const bird_list = bird_data.split('\n').sort()
   console.log(bird_list)

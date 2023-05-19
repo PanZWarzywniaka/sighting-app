@@ -2,7 +2,12 @@ let bodyParser = require("body-parser");
 let Chat = require('../models/chats');
 const fs = require('fs'); //file system
 
-
+/**
+ * Creates a new chat object and stores in MongoDB
+ * that draw the image will incrementally paint on the screen. 
+ *
+ * @param  chatData  achat data to be stored in server DB
+*/
 exports.create = function (chatData) {
 
 
@@ -19,11 +24,17 @@ exports.create = function (chatData) {
     });
 };
 
+
+/**
+ * Final controller for viewing a sighting, lists all chats from MongoDB
+ * @param req 
+ * @param res 
+ * @param sightingObj 
+ */
 exports.list_all = function(req,res,sightingObj) {
     console.log(sightingObj)
     let sightingId = req.params.sightingId
     let username = req.query.username
-    let ret = [];
     Chat.find({sightingId:sightingId},(err,chats) => {
         if (err)
             console.log(err)
@@ -34,5 +45,4 @@ exports.list_all = function(req,res,sightingObj) {
         }
 
     })
-    return ret;
 };

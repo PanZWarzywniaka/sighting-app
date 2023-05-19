@@ -6,6 +6,13 @@ let Chat = require("./chats");
 let path = require('path');
 
 
+
+/**
+ * Create sighting controller used for /add page, parses data from the form
+ * and saves new Sighting in database, then redirects to landing page
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.create = function (req, res) {
     let userData = req.body;
     // splits location field into longitude and latitude
@@ -35,6 +42,14 @@ exports.create = function (req, res) {
     });
 };
 
+/**
+ * Queries the database for all sightings and sorts them by proximity.
+ * Current user's location is retrieved from request query.
+ * If location is not supplied use default location for Sheffield.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.list_nearby = function (req, res, next) {
     // get position of current user to find the nearest sightings
     
@@ -71,7 +86,13 @@ exports.list_nearby = function (req, res, next) {
         });
 };
 
-
+/**
+ * Queries the database for all sightings, and sorts them by recency.
+ * Then redirects to home page to display results
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.list_recent = function (req, res, next) {
     Sighting.find({}).sort({ last_seen: -1 })
         .exec(function (err, sightings) {
@@ -84,9 +105,15 @@ exports.list_recent = function (req, res, next) {
 };
 
 
-
-
-
+/**
+ * This controller queries server database to retrieve
+ * all sightings created by user.
+ * User names is retrieved a query parameter
+ * Renders index page with database results
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.list_mine = function (req, res, next) {
     let name = req.query.username;
     console.log(`Listing mine for: ${name}`);
@@ -102,7 +129,17 @@ exports.list_mine = function (req, res, next) {
 
 };
 
-
+/**
+ * This controller is used for viewing a sighting.
+ * After retrieving a Sighting from database
+ * GET request is sent to DBPedia knowledge graf
+ * to retrieve, image, abstract, and link to wikipedia page
+ * If request is successfull, controll is passed to Chat.list_all
+ * to read all chats from the database
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} obj Sighting object
+ */
 function queryBirdInfoFromDBPedia(req, res, obj) {
     let identification = obj['identification'].trim()
     const sparqlQuery = `SELECT  ?wiki_link ?image_link  (REPLACE(?abstract, "@en", "") AS ?abstract) 
@@ -166,7 +203,14 @@ function queryBirdInfoFromDBPedia(req, res, obj) {
 }
 
 
-// load the data for a specific sighting
+/**
+ * Retrieves sighting from MongoDB
+ * and calls queryBirdInfoFromDBPedia to enrich
+ * sighting info with more information
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.getSightingById = function (req, res, next) {
     Sighting.findById(req.params.sightingId, function (err, obj) {
         if (err)
@@ -177,7 +221,13 @@ exports.getSightingById = function (req, res, next) {
 };
 
 
-// load the data for a specific sighting
+/**
+ * This controller is used to update Sihtings 
+ * identification field. Parameters  to find
+ * and update are in request body
+ * @param {*} req 
+ * @param {*} res 
+ */
 exports.updateSightingById = function (req, res) {
 
     let userData = req.body;

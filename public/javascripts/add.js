@@ -4,7 +4,11 @@ import * as idb from "./indexedDB.js";
 let map;
 let marker;
 
-
+/**
+ * Initializes map on /add page
+ * User can click on the map 
+ * to set location for a sighitng
+ */
 function initMap() {
     map = gMap.createMap("map",true,[53.3811,-1.4701])
     marker = gMap.addClickListener(map,'location',marker,true,"/images/bird.png")
@@ -14,7 +18,10 @@ let requestIDB = idb.connectToIDB(() => {
     console.log("connected to idb on add page")
 });
 
-
+/**
+ * register sighting sync when user is offline
+ * for later upload
+ */
 function registerSightingSync() {
     // only register sync when user offline
 
@@ -62,6 +69,12 @@ function registerSightingSync() {
     }
 
 }
+
+/**
+ * Handles on submit form when user
+ * wants to submit a new sighting
+ * Validates the form
+ */
 function onSubmit(event) {
     registerSightingSync()
     event.preventDefault();
@@ -104,7 +117,9 @@ function onSubmit(event) {
 window.onSubmit = onSubmit;
 window.initMap = initMap;
 
-
+/**
+ * Encodes images to base64
+ */
 function encode() {
     console.log("test");
     var selectedfile = document.getElementById("myImage").files;

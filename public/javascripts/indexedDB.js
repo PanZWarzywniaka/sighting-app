@@ -1,3 +1,8 @@
+/**
+ * Helper function to connect to IndexDB
+ * @param {*} handleSuccess 
+ * @returns requestIDB
+ */
 function connectToIDB(handleSuccess){
 
     const handleUpgrade = (ev) => {
@@ -21,7 +26,10 @@ function connectToIDB(handleSuccess){
     return requestIDB;
 }
 
-// only for location and username
+/**
+ * Helper function to read value from IndexDB
+ * only for location and username
+ */
 function readValue(objectStoreName, requestIDB, readValueSuccess, readValueError){
     const myIDB = requestIDB.result
     const transaction = myIDB.transaction([objectStoreName], "readwrite")
@@ -51,9 +59,12 @@ function clearStore(objectStoreName, requestIDB){
     myStore.clear()
 }
 
-
-
-// only for location and username
+/**
+ * Helper function to write values from IndexDB
+ * @param objectStoreName - name of object store new value being placed in
+ * @param requestIDB  - Idb instance
+ * @param value - the new value being added
+ */
 function saveValue(objectStoreName, requestIDB, value){
     const myIDB = requestIDB.result
     const transaction = myIDB.transaction([objectStoreName], "readwrite")
@@ -65,5 +76,6 @@ function saveValue(objectStoreName, requestIDB, value){
     console.log(`value: ${value} was saved in the ${objectStoreName} store in IDb`)
 
 }
-
+//export to be available in other JS scripts
 export { connectToIDB,readValue,readAllValues,saveValue,clearStore};
+

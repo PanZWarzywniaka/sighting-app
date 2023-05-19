@@ -1,3 +1,10 @@
+/**
+ * Helper to inialize map using Google Maps API
+ * @param {*} mapId div element when map will be displayed 
+ * @param {boolean} useUserLoc should we use users GPS location
+ * @param {*} loc longitude and lattidue of the marker
+ * @returns 
+ */
 function createMap(mapId, useUserLoc, loc) {
     let map = new google.maps.Map(document.getElementById(mapId),{
         disableDefaultUI: true,
@@ -24,6 +31,15 @@ function createMap(mapId, useUserLoc, loc) {
     return map
 }
 
+/**
+ * Add click listeber to map
+ * @param {*} map div element
+ * @param {*} locationStoreElement 
+ * @param {*} marker 
+ * @param {*} canAddMarker 
+ * @param {*} iconPath what Icon to use
+ * @returns 
+ */
 function addClickListener(map,locationStoreElement,marker,canAddMarker,iconPath){
     // Place marker where user clicks on map and store longitude and latitude in hidden input fields in the form
     map.addListener("click", (event) => {
@@ -34,7 +50,15 @@ function addClickListener(map,locationStoreElement,marker,canAddMarker,iconPath)
 }
 
 
-// Adds a marker to the map
+/**
+ * Adds new marker on the map
+ * @param {*} position to be marked on map
+ * @param {*} map map element
+ * @param {*} marker existing marker
+ * @param {boolean} canAddMarker can user add new marker
+ * @param {*} iconPath path for marker icon
+ * @returns new marker for the map
+ */
 function addMarker(position,map,marker,canAddMarker,iconPath) {
     if(canAddMarker){
         // get rid of previous marker since user can only input 1 marker

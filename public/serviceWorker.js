@@ -59,14 +59,12 @@ self.addEventListener('activate', function (e) {
     return self.clients.claim();
 })
 
-
 self.addEventListener('fetch', (event) => {
     try{
         event.respondWith(
             fetch(event.request)
                 .then((response) => {
                     const clonedResponse = response.clone();
-
                     caches.open(CACHE_STATIC_NAME)
                         .then((cache) => {
                             if (event.request.method === "GET")
@@ -76,13 +74,6 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 })
                 .catch((err) => {
-                    // when offline return cached requests
-                    // need to change this so if:
-                    // event.request.url contains "/add" and event.request.method === "POST"
-
-
-                    // then sighting needs to be added to indexedDB
-
                     return caches.match(event.request)
                 })
         )

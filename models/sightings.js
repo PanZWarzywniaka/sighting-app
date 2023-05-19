@@ -2,6 +2,15 @@ let mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
+/**
+ * Schema for Sighting,
+ * each sighting has set identification, name of the bird species
+ * has description
+ * has username to store author
+ * has timestamp when bird was last seen
+ * has location object that stores longitude and latitude when was created
+ * has base64 representation of image
+ */
 let SightingSchema = new Schema(
     {
         identification: {type: String, required: true},
@@ -23,8 +32,6 @@ SightingSchema.set('toObject', {getters: true});
 SightingSchema.index({ "location": "2dsphere" });
 
 
-// the schema is useless so far
-// we need to create a model using it
 let Sighting = mongoose.model('Sighting', SightingSchema);
 
 // make this available to our users in our Node applications

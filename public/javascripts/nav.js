@@ -6,6 +6,9 @@ let navMap;
 let navMarker;
 let requestIDB;
 
+/**
+ * Execute when page has been loaded
+ */
 $(window).on('load', function() {
     let map = document.getElementById("nav_map")
     let offline = document.getElementById("offline_pic")
@@ -19,13 +22,32 @@ $(window).on('load', function() {
     readUserData()
 });
 
-
+/**
+ * Called afrer reading username from indexDB
+ * has been successfull
+ * Initalizing all dynamic content on pages depending on username
+ * @param {*} ev 
+ */
 const readUsernameSuccess = (ev) => {
     if (ev.target.result === undefined){
         console.error("There is no username in the database")
         document.getElementById("mine-link").classList.add("disabled")
         document.getElementById("mine_span").setAttribute("title","Must enter Username to view")
         $('#username-modal').modal('show'); //show modal
+
+        //dissable the chat
+        let chatInput = document.getElementById('chat_input')
+        if (chatInput!== null) {
+            chatInput.value = "Chat Disable, Set your username to use the chat"
+            chatInput.disabled = true
+        }
+        
+        let submitSighting = document.getElementById('g')
+        if (submitSighting!== null) {
+            submitSighting.value = "Need log in first"
+            submitSighting.disabled = true
+        }
+
     } else {
         document.getElementById("mine_span").setAttribute("title","")
         document.getElementById("mine-link").classList.remove("disabled")
@@ -40,6 +62,14 @@ const readUsernameSuccess = (ev) => {
     }
 
 }
+
+/**
+ * Called afrer reading location from indexDB
+ * has been successfull
+ * Initalizing all dynamic content on pages
+ *  depending on  user location
+ * @param {*} ev 
+ */
 const readLocationSuccess = (ev) => {
     if (ev.target.result === undefined){
         console.error("There is no location in the database")
@@ -63,6 +93,11 @@ const handleSuccess = () => {
     let save_btn = document.getElementById("saveUserData")
     save_btn.addEventListener("click", saveUserData)
 }
+
+/**
+ * Saves user data to indexdb after
+ * user submited form on "Change Profile" modal
+ */
 requestIDB = idb.connectToIDB(handleSuccess);
 let saveUserData = () => {
     let username = document.getElementById('username_input').value
@@ -84,12 +119,18 @@ let readUserData = () => {
     })
 }
 
+/**
+ * Initialize map for change profile modal
+ * Where user can input their location
+ */
 function initMapNav() {
     navMap = gMap.createMap("nav_map",true,[53.3811,-1.4701])
     navMap = gMap.addClickListener(navMap,'user_location',navMarker,true,"/images/user.png")
 }
 
-// registering service Worker
+/**
+ * registering service Worker
+ */
 navigator.serviceWorker.register("/serviceWorker.js", { type: 'module' }).then(
     (register) => {
         console.log(`Registered: ${register.scope}`)
